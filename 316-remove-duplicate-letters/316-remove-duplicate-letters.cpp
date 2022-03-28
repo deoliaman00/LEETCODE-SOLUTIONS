@@ -2,49 +2,48 @@ class Solution {
 public:
     string removeDuplicateLetters(string s) 
     {
-        vector<int>checker(26,0);
-        vector<bool>cc(26,0);
-        stack<char>st;
+        vector<int> check(26,0);
+        vector<int> cc(26,0);
         string ans;
-        // test case1:-  c b e a c d c b c
-        // marking all the alphabets into the hashmap
+        stack<char> stk;
         for(int i=0;i<s.size();i++)
         {
-         checker[s[i]-'a']++;   
+            check[s[i]-'a']++;
         }
-        // checker:-     a-1  b-1  c-4  d-1  e-1
         
         
         for(int i=0;i<s.size();i++)
         {
-         checker[s[i]-'a']--;  //DECREASINGTHECOUNT
-            // we will take the font and now we are using it so we will discuss it
+            check[s[i]-'a']--;
+            // DECREMENTING THE ELEMENT FROM THE CHECK--ARRAY SO THAT WE KNOW WE HAVE USED IT
             
-            // we will check 
-            if(cc[s[i]-'a']==0) //AGR ELEMENT EXIST JRTA HAI YA NHI
+            if(cc[s[i]-'a']==0)
             {
-               while(st.size()>0  &&  st.top()>s[i] && checker[st.top()-'a']>0)
-               {
-                   char rem=st.top();
-                   st.pop();
-                   cc[rem-'a']=0;
-                   
-               }
-                st.push(s[i]);
+                while(stk.size()>0 && stk.top()>s[i] && check[stk.top()-'a']>0 )
+                {
+                    // STORING THE ELEMENT THAT WE NEED TO POP OUT AND STORING IT INTO TEMP
+                    char temp=stk.top();
+                    // NOW DECREMENTING IT SO THAT ITS PRESENCE IS THERE
+                    cc[temp-'a']=0;
+                    stk.pop();
+                    
+                }
+                stk.push(s[i]);
                 cc[s[i]-'a']=1;
             }
+            
         }
-        while(!st.empty())
-        {
-            ans.push_back(st.top());
-            st.pop();
-        }
+        
+        
+       while(!stk.empty())
+       {
+           ans.push_back(stk.top());
+           stk.pop();
+       }
+        
         reverse(ans.begin(),ans.end());
         
+        
         return ans;
-        
-        
-        
-        
-    }
+  }
 };
