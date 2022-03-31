@@ -1,22 +1,33 @@
 class Solution {
 public:
-    bool isPalindrome(string s)
+    bool isPalindrome(string s) 
     {
+        vector<char>a;
         
-        string curr = "";
-        for(int i = 0; i < s.size(); i++)
-            if(isalnum(s[i]))
-                curr.push_back(s[i]);
-        transform(curr.begin(),curr.end(),curr.begin(), :: tolower);
-        int i = 0, j = curr.size() - 1;
-        while(i <= j)
+        int i,j;
+        i=0,j=s.length();
+        //s.erase(remove(s.begin(),s.end(),' '),s.end());
+        cout<<s<<endl;
+        transform(s.begin(),s.end(),s.begin(),::tolower);
+        cout<<s<<endl;
+        for(int i=0;i<j;i++)
         {
-            if(curr[i] != curr[j])
-                return false;
-            i++; j--;
+            if(isalnum(s[i])!=0)
+            {
+              a.push_back(s[i]);  
+            }
         }
-        return true; 
-    
+        for(auto i:a)
+            cout<<i;
+        cout<<endl;
+    i=0,j=a.size()-1;
+        // race a car -> raceacar-----racaecar
+        while(i<j)
+        {
+            if(a[i++]!=a[j--])
+                return false;
+        }
         
+        return true;
     }
 };
