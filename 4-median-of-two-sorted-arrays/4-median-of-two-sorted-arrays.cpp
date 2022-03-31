@@ -20,15 +20,15 @@ public:
         auto itr=m.begin();
         auto itr1=m.begin();
         
-        advance(itr,a/2);
-        if(a%2!=0)
+        advance(itr,a/2);   // 0,5
+        if(a%2!=0)   // 1!=0
         {
             sol=sol*(*itr);
         }
-        else
+        else   // 0==0
         {
-            advance(itr1,a/2-1);
-                sol= (*itr+*itr1)/2.0;
+            advance(itr1,a/2-1);  // 0,4
+                sol= (*itr+*itr1)/2.0; // 4,5--> (4+6)/2==5
         }
         
         
