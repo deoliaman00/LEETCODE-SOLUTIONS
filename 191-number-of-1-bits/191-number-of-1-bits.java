@@ -14,7 +14,7 @@ public class Solution {
         return count;
         */
         
-        // solution2
+        /* solution2
         int count=0;
         while(n!=0)
         {
@@ -23,7 +23,12 @@ public class Solution {
         }
         return count;
         
+        */
         
+        //solution3
+        if(n==0) return 0;
+        if(n==1) return 1;
+        return hammingWeight(n&(n-1))+1;
         
     }
 }
