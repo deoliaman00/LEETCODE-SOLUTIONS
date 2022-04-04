@@ -14,9 +14,9 @@ public:
                 nums[k++]=nums[i];
             }
         }
-        for(;k<n;k++)
+        for(int i=k;i<n;i++)
         {
-            nums[k]=0;
+            nums[i]=0;
         }
      }  
         //return nums;
