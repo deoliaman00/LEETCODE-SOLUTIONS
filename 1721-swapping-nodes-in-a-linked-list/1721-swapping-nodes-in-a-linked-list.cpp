@@ -34,6 +34,9 @@ public:
         
         
         
+        // method followed 
+        // left is moving k-1 times
+        // right is moving end-2 times means n-k times
         
         ListNode *left=head,*right=head,*current=head;
         
