@@ -12,7 +12,9 @@ class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k)
     {
-         ListNode *ptr1 = head, *ptr2 = head, *kth = NULL;
+        
+        /* sol 1
+        ListNode *ptr1 = head, *ptr2 = head, *kth = NULL;
         while (--k)
             ptr1 = ptr1->next;
         
@@ -25,6 +27,35 @@ public:
         }
         swap(ptr2->val, kth->val);
         return head;
+        */
+        
+        
+        // 2nd method
+        
+        
+        
+        
+        ListNode *left=head,*right=head,*current=head;
+        
+        int count=1;
+        while(current)
+        {
+            if(count<k)
+            {
+                left=left->next;
+            }
+            if(count>k)
+            {
+                right=right->next;
+            }
+        
+        
+        current=current->next;
+        count++;
+        }
+        
+        swap(left->val,right->val);
+        return head;    
     }
     
 };
