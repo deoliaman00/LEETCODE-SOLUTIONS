@@ -2,6 +2,7 @@ class Solution {
 public:
     int lastStoneWeight(vector<int>& stones)
     {
+        /*
         // new syntax priority queue
         // input---->  [2,7,4,1,8,1]
         priority_queue<int> max_heap;  // ---------> 8 7 4 1 2 1
@@ -40,7 +41,59 @@ public:
         
         
         return 0;
+        */
+        
+        priority_queue<int> max_heap;
+        int n=stones.size();
+        
+        for(auto i:stones)
+        {
+            max_heap.push(i);
+        }
+        
+        int x,y;
+        
+        while(n>1)
+        {
+         y=max_heap.top();
+        max_heap.pop();
+        
+            
+        x=max_heap.top();
+        max_heap.pop();
+        n-=2;
+        if(y-x>0)
+        {
+            max_heap.push(y-x);
+            n+=1;
+        }
+        }
+            if(max_heap.empty()==0)
+                return max_heap.top();
+        return 0;
+            
+        }
+};  
         
         
-    }
-};
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
