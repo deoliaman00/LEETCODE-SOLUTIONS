@@ -11,7 +11,7 @@ public:
             
         }
         
-        for(auto &i:hashmp)
+        for(auto i:hashmp)
         {
             minheap.push({i.second,i.first});
             if(minheap.size()>k)
