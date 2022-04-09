@@ -15,7 +15,7 @@ public:
     {
         vector<int> preorder;
         stack<TreeNode*> st;
-        while(root!=NULL || !st.empty())
+        while(root!=NULL || st.empty()==0)
         {
             if(root!=NULL)
             {
