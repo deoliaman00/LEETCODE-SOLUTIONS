@@ -13,39 +13,67 @@ public:
     ListNode* reverseKGroup(ListNode* head, int k) 
     {
         
-        if(head==NULL || k==1) return head;
-        ListNode *temp= new ListNode(0);
-        temp->next=head;
-        ListNode*curr=temp,*nex=temp,*pre=temp;
+//         if(head==NULL || k==1) return head;
+//         ListNode *temp= new ListNode(0);
+//         temp->next=head;
+//         ListNode*curr=temp,*nex=temp,*pre=temp;
         
+//         int count=0;
+        
+        
+//         while(curr->next!=NULL)
+//         {
+           
+//             curr=curr->next;
+//              count++;
+//         }
+        
+//         int i=0;
+        
+//         while(count>=k)
+//         {
+//             curr=pre->next;
+//             nex=curr->next;
+//             for(i=1;i<k;i++)
+//             {
+//                 curr->next=nex->next;
+//                 nex->next=pre->next;
+//                 pre->next=nex;
+//                 nex=curr->next;
+//             }
+//             pre=curr;
+//         count-=k;
+//         }
+//         return temp->next;
+        
+        
+        
+        ListNode *t= new ListNode(0);
+        t->next=head;
+        ListNode *p=t,*c=t,*n=t;
         int count=0;
         
-        
-        while(curr->next!=NULL)
+        while(c->next)
         {
-           
-            curr=curr->next;
-             count++;
+            count++;
+            c=c->next;
         }
-        
-        int i=0;
         
         while(count>=k)
         {
-            curr=pre->next;
-            nex=curr->next;
-            for(i=1;i<k;i++)
+            c=p->next;
+            n=c->next;
+            for(int i=1;i<k;i++)
             {
-                curr->next=nex->next;
-                nex->next=pre->next;
-                pre->next=nex;
-                nex=curr->next;
+                c->next=n->next;
+                n->next=p->next;
+                p->next=n;
+                n=c->next;
             }
-            pre=curr;
-        count-=k;
+            p=c;
+            count-=k;
         }
-        return temp->next;
         
-        
+        return t->next;
     }
 };
