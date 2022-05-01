@@ -10,19 +10,45 @@
  */
 class Solution {
 public:
-   ListNode* reverseBetween(ListNode* head, int m, int n) {
-       ListNode *dummy = new ListNode(0), *pre = dummy, *cur;
-       dummy -> next = head;
-       for (int i = 0; i < m - 1; i++) {
-           pre = pre -> next;
-       }
-       cur = pre -> next;
-       for (int i = 0; i < n - m; i++) {
-           ListNode* temp = pre -> next;
-           pre -> next = cur -> next;
-           cur -> next = cur -> next -> next;
-           pre -> next -> next = temp;
-       }
-       return dummy -> next;
-   }
+    ListNode* reverseBetween(ListNode* head, int left, int right)
+    {
+        if(head==NULL)
+        {
+            return NULL;
+        }
+        ListNode *prev=NULL,*curr=head;
+        while(left>1)
+        {
+            prev=curr;
+            curr=curr->next;
+            left--;
+            right--;
+        }
+        
+        ListNode *connect= prev;
+        ListNode *tail= curr;
+        ListNode *nextNode=NULL;
+        while(right>0) // 3
+        {
+            nextNode= curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nextNode;
+            right--;
+        }
+        
+        
+        //... now all the nodes have been reversed now connecting the before left and after right nodes     
+        if(connect!=NULL)
+        {
+            connect->next=prev;
+        }
+        else
+        {
+            head=prev;
+        }
+        
+        tail->next=curr;
+        return head;
+    }
 };
