@@ -10,45 +10,50 @@
  */
 class Solution {
 public:
-    ListNode* reverseBetween(ListNode* head, int left, int right)
+    ListNode* reverseBetween(ListNode* head, int left, int right) 
     {
         if(head==NULL)
         {
             return NULL;
         }
-        ListNode *prev=NULL,*curr=head;
+        
+        ListNode *curr=head,*prev=NULL;
+        
         while(left>1)
         {
             prev=curr;
             curr=curr->next;
+            
             left--;
             right--;
         }
         
-        ListNode *connect= prev;
-        ListNode *tail= curr;
-        ListNode *nextNode=NULL;
-        while(right>0) // 3
+        ListNode *connectFirst=prev;
+        ListNode *tailConnect=curr;
+        
+        ListNode *tempNode=NULL;
+        while(right>0)
         {
-            nextNode= curr->next;
+            tempNode=curr->next;
             curr->next=prev;
             prev=curr;
-            curr=nextNode;
+            curr=tempNode;
             right--;
         }
         
         
-        //... now all the nodes have been reversed now connecting the before left and after right nodes     
-        if(connect!=NULL)
+        if(connectFirst!=NULL)
         {
-            connect->next=prev;
+            connectFirst->next=prev;
         }
         else
         {
             head=prev;
         }
         
-        tail->next=curr;
+        tailConnect->next=curr;
+        
         return head;
+        
     }
 };
