@@ -10,70 +10,32 @@
  */
 class Solution {
 public:
-    ListNode* reverseKGroup(ListNode* head, int k) 
+    ListNode* reverseKGroup(ListNode* head, int k)
     {
-        
-//         if(head==NULL || k==1) return head;
-//         ListNode *temp= new ListNode(0);
-//         temp->next=head;
-//         ListNode*curr=temp,*nex=temp,*pre=temp;
-        
-//         int count=0;
-        
-        
-//         while(curr->next!=NULL)
-//         {
-           
-//             curr=curr->next;
-//              count++;
-//         }
-        
-//         int i=0;
-        
-//         while(count>=k)
-//         {
-//             curr=pre->next;
-//             nex=curr->next;
-//             for(i=1;i<k;i++)
-//             {
-//                 curr->next=nex->next;
-//                 nex->next=pre->next;
-//                 pre->next=nex;
-//                 nex=curr->next;
-//             }
-//             pre=curr;
-//         count-=k;
-//         }
-//         return temp->next;
-        
-        
-        
-        ListNode *t= new ListNode(0);
-        t->next=head;
-        ListNode *p=t,*c=t,*n=t;
         int count=0;
+         ListNode *Curr=head,*prev=NULL,*first=NULL;
+         ListNode* cursor = head;
+        for(int i = 0; i < k; i++){
+            if(cursor == nullptr) return head;
+            cursor = cursor->next;
+        }
         
-        while(c->next)
+       
+        while(count<k && Curr!=NULL)
         {
+            first=Curr->next;
+            Curr->next=prev;
+            prev=Curr;
+            Curr=first;
             count++;
-            c=c->next;
         }
         
-        while(count>=k)
+        if(first!=NULL)
         {
-            c=p->next;
-            n=c->next;
-            for(int i=1;i<k;i++)
-            {
-                c->next=n->next;
-                n->next=p->next;
-                p->next=n;
-                n=c->next;
-            }
-            p=c;
-            count-=k;
+            head->next=reverseKGroup(first,k);
         }
         
-        return t->next;
+        
+        return prev;
     }
 };
