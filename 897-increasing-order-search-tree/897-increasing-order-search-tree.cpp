@@ -10,21 +10,25 @@
  * };
  */
 class Solution {
-vector<int>ams;
-    public:
+public:
+    TreeNode *temp=new TreeNode(-1);
+    TreeNode *j=temp;
     
-    void inorder(TreeNode*& ans, TreeNode* root) {
-        if (!root) return;
-        inorder(ans, root->left);
-        ans->right = new TreeNode(root->val);
-        ans = ans->right;
-        inorder(ans, root->right);
+    void inorder(TreeNode *root)
+    {   
+        if(root==NULL)
+            return;
+        
+        inorder(root->left);
+        temp->right= new TreeNode(root->val);
+        temp=temp->right;
+        inorder(root->right);
+        
     }
-    TreeNode* increasingBST(TreeNode* root) {
-        TreeNode* t;
-        TreeNode* a = new TreeNode();
-        t = a;
-        inorder(a, root);
-        return t->right;
+    
+    TreeNode* increasingBST(TreeNode* root)
+    {
+        inorder(root);
+     return j->right; 
     }
 };
