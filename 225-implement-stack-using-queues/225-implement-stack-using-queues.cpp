@@ -96,6 +96,7 @@ queue<int> q;
 			q.push(q.front());
 			q.pop();
 		}
+        cout<<q.front()<<endl;
 	}
     
     int pop() 
