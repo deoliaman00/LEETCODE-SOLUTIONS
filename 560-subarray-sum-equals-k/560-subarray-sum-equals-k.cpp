@@ -2,7 +2,7 @@ class Solution {
 public:
     int subarraySum(vector<int>& nums, int k)
     {
-        /*
+        
         map<int,int>ans;
         int n=nums.size();
         int aa=0,sum=0;
@@ -15,25 +15,25 @@ public:
             
             if(ans.find(sum-k)!=ans.end())
             {
-                aa=aa+ ans[sum-k]+1;
+                aa+=ans[sum-k];
                 cout<<aa<<" ";
             }
-            ans[sum-k]++;     
+            ans[sum]++;     
         }
          return aa;
-        */
-        map<int,int> mp;
-        int sum=0,ans=0;
-        mp[sum] = 1;
-        int n=nums.size();
-        for(int i=0;i<n;i++){
-            sum += nums[i];
-            int find = sum - k;
-            if(mp.find(find) != mp.end()){
-                ans += mp[find];
-            }
-            mp[sum]++;
-        }
-        return ans;
+        
+//         map<int,int> mp;
+//         int sum=0,ans=0;
+//         mp[sum] = 1;
+//         int n=nums.size();
+//         for(int i=0;i<n;i++){
+//             sum += nums[i];
+//             int find = sum - k;
+//             if(mp.find(find) != mp.end()){
+//                 ans += mp[find];
+//             }
+//             mp[sum]++;
+//         }
+//         return ans;
     }
 };
