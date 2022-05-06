@@ -1,62 +1,74 @@
 class Solution {
 public:
-    vector<vector<int>> fourSum(vector<int>& nums, int target) 
+    vector<vector<int>> fourSum(vector<int>& nums, int target)
     {
-        vector<vector<int>> ans;
+         vector<vector<int>>ans;
         sort(nums.begin(),nums.end());
-        int p,q,r,s,n;
-        n=nums.size();
-       
-        int sum;
-        if(nums.empty()) return ans;
+        int a=0,b=0,c=0,d=0,sum=0;
+        int n=nums.size();
+        int rsum=0;
         
-        for(p=0;p<n;p++)
+        for(;a<n;a++)
         {
-             int find3=target-nums[p];
-            for(q=p+1;q<n;q++)
-            {
-                
-                int find2=find3-nums[q];
-                r=q+1;
-                s=n-1;
-                
-                while(r<s)
+           
+                for(b=a+1;b<n;b++)
                 {
-                    sum=nums[s]+nums[r];
-                  if(sum<find2)
-                  {
-                      r++;
-                  }
-                  else if(sum>find2)
-                  {
-                      s--;
-                  }
-                  else
-                  {
-                      vector<int> a(4,0);
-                      a[0]=nums[p];
-                      a[1]=nums[q];
-                      a[2]=nums[r];
-                      a[3]=nums[s];
-                      ans.push_back(a);
-                      
-                      // ELIMINATING THE SAME VALUES AND NOT CONSIDERING THEM IN THE SOLn ARRAY
-                      // BOTH FROM P=1 Q=1 R=P+1 -> ++ -> ++ -> ++ S=n-1 ->-- -> -- -> -- -> --
-                      while(r<s && nums[r]==a[2]) ++r;
-                      while(r<s && nums[s]==a[3]) --s;       
-                  } 
-              }
-                // EDGE CASE 2
-                // HERE THE ARRAY MUST start with unique element that is why eliminating the same elements here 
-                 while(q+1<n && nums[q+1]==nums[q]) ++q;
-               
+                    rsum=target-nums[b]-nums[a];
+                    c=b+1,d=n-1;
+                    while(c<d)
+                    {
+                        sum=nums[c]+nums[d];
+                        
+                        if(rsum==sum)
+                        {
+                            vector<int>aa;
+                            aa.push_back(nums[a]);
+                            aa.push_back(nums[b]);
+                            aa.push_back(nums[c]);
+                            aa.push_back(nums[d]);
+                            ans.push_back(aa);
+                            
+                            while(c<d && (nums[c]==nums[c+1])) c++;
+                            while(c<d && (nums[d]==nums[d-1])) d--;
+                            
+                            c++;
+                            d--;
+                        }
+                        else if(rsum>sum)
+                        {
+                            c++;
+                            
+                        }
+                        else
+                        {
+                            d--;
+                        }
+                    }
                 
+                while(b+1<n && (nums[b]==nums[b+1])) b++;
+                }
+            while(a+1<n && (nums[a]==nums[a+1])) a++;
             }
-            //EGDE CASE 3
-            // HERE ALSO I HAVE DELETED THE COMMON ELEMENT THAT MIGHT OCCUR IN OUR SOLN TO ELEMINATE IT AND PROCEED FURTHER
-             while(p+1<n && nums[p+1]==nums[p]) ++p;
-        }
-         return ans;
+        
+        return ans;
+        
     }
-   
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
