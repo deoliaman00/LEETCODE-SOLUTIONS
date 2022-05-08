@@ -64,9 +64,9 @@ public:
     
     bool insert(int val) {
  
-        bool flag=0;
-        if(!mp[val].size())
-            flag=1;
+        bool flag=false;
+        if(mp[val].size()==0)
+            flag=true;
 
         mp[val].insert(v.size());
         v.push_back(val);
