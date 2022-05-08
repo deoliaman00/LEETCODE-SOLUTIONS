@@ -1,111 +1,59 @@
-// class RandomizedCollection {
-// public:
-//     unordered_map<int,set<int>> um;
-//     vector<int> v;
-//     int size;
-//     RandomizedCollection() {
-//         v.resize(100005,-1);
-//         size=0;
-//     }
-    
-//     bool insert(int val) {
-//         bool flag;
-//         if(um.count(val))
-//             flag=false;
-//         else
-//             flag=true;
-//         um[val].insert(size);
-//         v[size] = val;
-//         size++;
-//         return flag;
-//     }
-    
-//     bool remove(int val) {
-//         if(um.count(val) == 0)
-//             return false;
-//         auto it = um[val].end();
-//         --it;
-//         int x = *it;
-//         um[val].erase(it);
-//         if(um[val].size() == 0)
-//             um.erase(val);
-//         if(size == 1 || x == size-1)
-//         {
-//             size--;
-//             v[x] = -1;
-//             return true;
-//         }
-//         v[x] = v[size-1];
-//         it = um[v[size-1]].end();
-//         --it;
-//         um[v[size-1]].erase(it);
-//         um[v[size-1]].insert(x);
-//         v[size-1]=-1;
-//         size--;
-//         return true;
-//     }
-    
-//     int getRandom() {
-//         return v[rand()%size];
-//     }
-// };
-    
 class RandomizedCollection {
 public:
-    unordered_map<int,unordered_set<int>>mp;
-    vector<int>v;
+    unordered_map<int,unordered_set<int>>map;
+    vector<int>ans;
     
-    
-    RandomizedCollection() {
-       mp.clear();   
-       v.clear();
+    RandomizedCollection()
+    {
+        map.clear();
+        ans.clear();
     }
     
-    
-    bool insert(int val) {
- 
-        bool flag=false;
-        if(mp[val].size()==0)
-            flag=true;
-
-        mp[val].insert(v.size());
-        v.push_back(val);
-        
+    bool insert(int val)
+    {
+        bool flag=false;// if element is already present in the vector as well as the hashmap
+        if(map[val].size()==0)
+        {
+            flag=true; // element not present
+        }
+        map[val].insert(ans.size());
+        ans.push_back(val);
         return flag;
+        
     }
     
-    
-    
-    
-    bool remove(int val) {
+    bool remove(int val) 
+    {
+        // return true if present
+        // return false if not present 
+        bool flag=true;
+        if(map[val].size()==0)
+        {
+            return false;
+        }
+         int k= *map[val].begin(); // index of value to be removed from the map as well as vector
+            map[val].erase(k);  // index erased from the map;
+       if(map[ans[ans.size()-1]].size()!=0)
+       {
+           int l=ans[ans.size()-1]; // last value inserted into l from vector [1,1,2];
+           map[l].erase(ans.size()-1);// going to the last value into the map and erasing its last index
+           
+           map[l].insert(k); // inserting its new index into the map too
+           
+           
+           
+           swap(ans[k],ans[ans.size()-1]);// swapping the last element from the map/from the vector and the first element from the vecotor 
+       }
+        ans.pop_back(); // deleting the last element 
+        return flag; // returning the flag
         
-        if(!mp[val].size())
-            return 0;
-        
-        int k=*mp[val].begin();
-        mp[val].erase(k);
-        
-     if(mp[v[v.size()-1]].size())
-     {  
-         int l=v[v.size()-1];
-         mp[l].erase(v.size()-1);
-         mp[l].insert(k);
-         swap(v[k],v[v.size()-1]);
-     }
-        
-        v.pop_back();
-        return 1;
     }
-    
-    
-    
-    
     
     int getRandom() {
-      return v[rand()%v.size()];
+        return ans[rand()%ans.size()];
+        
     }
 };
-
 
 /**
  * Your RandomizedCollection object will be instantiated and called as such:
