@@ -21,7 +21,7 @@ public:
     {
         // a b c v b b a 
         // idea is to not completely remove the element but to increase the count
-        if(pallindrone(s))
+        if(pallindrone(s)!=false)
         {
             return true;
         }
