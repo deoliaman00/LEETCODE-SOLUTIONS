@@ -1,36 +1,47 @@
 class Solution {
 public:
-    bool check(string s,int i,int j)
+    bool pallindrone(string s)
     {
-        while(i<j)
+        int i=0,j=s.size()-1;
+        
+        while(i<=j)
         {
-            if(s[i]==s[j])
-            {
-                i++,j--;
-            }
-            else
+            if(s[i]!=s[j])
             {
                 return false;
             }
-    }
+            i++;
+            j--;
+        }
         return true;
+        
     }
     
-    bool validPalindrome(string s) 
-    {      
-        int i=0,j=s.length()-1;
-        while(i<j)
+    bool validPalindrome(string s)
+    {
+        // a b c v b b a 
+        // idea is to not completely remove the element but to increase the count
+        if(pallindrone(s))
+        {
+            return true;
+        }
+        
+        int i=0,j=s.size()-1;
+        while(i<=j)
         {
             if(s[i]==s[j])
             {
-                i++,j--;
+            i++;
+            j--;
             }
             else
             {
-                return check(s,i+1,j)|| check(s,i,j-1);
+                return pallindrone(s.substr(i,j-i))||pallindrone(s.substr(i+1,j-i));
             }
+            
         }
-        return true; // ALL THE TIME i++ AND j-- THEREFORE DONE TRUE;
+        return false;
+        
         
     }
 };
