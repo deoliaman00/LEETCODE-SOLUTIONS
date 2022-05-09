@@ -1,26 +1,41 @@
 class Solution {
 public:
-     vector<string>result;
-    
-    void helper(int open,int close,int n,string current)
+     
+    void func(vector<string>&an,int op,int cl,string a)
     {
-        if(current.length()==n*2)
+        if(op==0 && cl==0)
         {
-            result.push_back(current);
+            an.push_back(a);            
             return;
         }
-        if(open<n)  helper(open+1,close,n,current+"(");
-        if(close<open)  helper(open,close+1,n,current+")");
-    }
+        if(op!=0)
+        {
+            string s=a;
+            s+="(";
+            func(an,op-1,cl,s);
+           
+        }
+        if(cl>op)
+        {
+          string s2=a;
+            s2+=")";
+            func(an,op,cl-1,s2);
+            
+        }  
+}
     
     
     
     
     
-    vector<string> generateParenthesis(int n) {
-          helper(0,0,n,"");
-        return result;
+    
+    
+    vector<string> generateParenthesis(int n)
+    {
+        vector<string>ans;
+        int open=n,close=n;
+        string as="";
+        func(ans,open,close,as);
+        return ans;
     }
 };
-
-
