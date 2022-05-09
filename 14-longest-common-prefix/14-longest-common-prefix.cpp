@@ -7,17 +7,18 @@ public:
         {
             return "";
         }
-        
+       //   0       1     2
+        //cat  catty     dog 
         sort(begin(strs),end(strs));
         string ans="";
         
-        string a=strs[0];
-        string b=strs[n-1];
-        for(int i=0;i<a.length();i++)
+        string a=strs[0]; // a= f l i g h t
+        string b=strs[n-1]; // b= f l o w e r
+        for(int i=0;i<a.length();i++) // 6
         {
             if(a[i]==b[i])
             {
-                ans+=a[i];
+                ans+=a[i]; //ans= f l 
             }
             else
             {
