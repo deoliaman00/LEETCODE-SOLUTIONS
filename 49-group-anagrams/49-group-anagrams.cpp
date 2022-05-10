@@ -2,27 +2,16 @@ class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs)
     {
-        // TO REDUCE THE I/O OPERATIONS 
-      ios_base::sync_with_stdio(false);
-      cin.tie(NULL);
-        
-        // WE WILL BE USING UNORDERED MAP SP THAT THE RUNTIME WILL BE LESS
-        unordered_map<string,vector<string>> checker;
-        for(int i=0;i<strs.size();i++)
-        {
-            string temp=strs[i];
-            sort(strs[i].begin(),strs[i].end());
-            checker[strs[i]].push_back(temp);
-           // checker.insert(strs[i],temp);
+         unordered_map<string, vector<string>> mp;
+        for (string s : strs) {
+            string t = s; 
+            sort(t.begin(), t.end());
+            mp[t].push_back(s);
         }
-        vector<vector<string>> a;
-        for(auto itr=checker.begin();itr!=checker.end();++itr)
-        {
-         a.push_back(itr->second);   
+        vector<vector<string>> anagrams;
+        for (auto p : mp) { 
+            anagrams.push_back(p.second);
         }
-        
-        return a;
-       
-        
+        return anagrams;
     }
 };
