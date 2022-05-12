@@ -1,49 +1,27 @@
 class Solution {
 public:
-    
-    void recurr(vector<int>&nums,vector<vector<int>>&ans,vector<int>&car,int A[])
+    void permii(vector<int>& nums,int indx,vector<vector<int>> &p)
     {
-        if(car.size()==nums.size())
+        if(indx>=nums.size())
         {
-            ans.push_back(car);
+         p.push_back(nums);   
             return;
         }
-        for(int i=0;i<nums.size();i++)
+        
+        for(int i=indx;i<nums.size();i++)
         {
-            if(A[i]==0)
-            {
-                A[i]=1;
-                car.push_back(nums[i]);
-                recurr(nums,ans,car,A);
-                A[i]=0;
-                car.pop_back();
-            }
+            swap(nums[i],nums[indx]); // 0 0  1 0  2 0 
+            permii(nums,indx+1,p);
+            swap(nums[i],nums[indx]);
+            
         }
-    }    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    }
     vector<vector<int>> permute(vector<int>& nums)
     {
-        vector<vector<int>> ans;
-         vector<int>carrier;
-        int n=nums.size();
-        int marker[n];
-        for(int i=0;i<nums.size();i++) marker[i]=0;
-        recurr(nums,ans,carrier,marker);
-        
-        
-        return ans;
-        
+        vector<vector<int>> perm;
+       
+        permii(nums,0,perm);
+        return perm;
         
     }
 };
