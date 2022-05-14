@@ -1,33 +1,24 @@
 class Solution {
 public:
-    bool isHappy(int n)
-    {
-        set<int>check;
-        int val,i=0;
-        bool flag=true;
-        
+    int digitSqSum(int n){
+        int sum=0;
+        while(n>0){
+            sum=sum+((n%10)*(n%10));
+            n=n/10;
+        }
+        return sum;
+    }
+    
+    bool isHappy(int n) {        
+        int temp=n;
         while(1)
         {
-            val=0;
-            while(n)
-            {
-                i=n%10;
-                val+=i*i;
-                n=n/10;
-            }
-            if(val==1)
-            {
-                return true;
-            }
-            else if(check.find(val)!=check.end())
-            {
+            if(temp==89)
                 return false;
-            }
-            check.insert(val);
-            n=val;
+            if(temp==1)
+                return true;
+            temp=digitSqSum(temp);
         }
-        return false;
-    //    return flag;
         
     }
 };
