@@ -18,33 +18,37 @@ public:
 
 class Solution {
 public:
-    Node* connect(Node* root) {
-                if(root==NULL){
-            return NULL;
-        }
-      queue<Node*>q;
-        q.push(root);
-        while(!q.empty())
+    Node* connect(Node* root)
+    {
+        if(root==NULL)return root;
+        queue<Node*>help;
+        Node *black=root;
+        help.push(black);
+        
+        
+        // jabtk hmara queue empty nahi huva tbtk chlte raho
+        
+        while(help.empty()==0)
         {
-            int n=q.size();
-            Node*prev=NULL;
+            int n=help.size(); // eg-> 1
+            Node *prev=NULL;
             for(int i=0;i<n;i++)
             {
-                auto top=q.front();
-                q.pop();
+                Node *top= help.front(); // here top->1
+                help.pop(); // queue is empty
                 top->next=prev;
                 prev=top;
                 if(top->right)
                 {
-                    q.push(top->right);
+                    help.push(top->right);
                 }
                 if(top->left)
                 {
-                    q.push(top->left);
+                    help.push(top->left);
                 }
             }
         }
-        return root;
         
+        return root;
     }
 };
