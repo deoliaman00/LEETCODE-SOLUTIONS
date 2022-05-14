@@ -2,6 +2,8 @@ class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs)
     {   
+        // prefix----------> first element of the string 
+        // postfix---------> last element of the string 
         int n=strs.size();
         if(n==0 )
         {
