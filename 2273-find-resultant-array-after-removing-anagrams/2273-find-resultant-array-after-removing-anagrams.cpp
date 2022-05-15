@@ -49,7 +49,7 @@ public:
             {
                 res.push_back(words[i]);
                 
-                st.erase(st.begin(),st.end());
+                st.erase(st.begin(),st.end()); // esss pure code ki jaaaaaaaaaaaaaaaaaaaan
                 
                 st.insert(temp);
             }
