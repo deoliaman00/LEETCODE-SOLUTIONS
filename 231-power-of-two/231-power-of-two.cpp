@@ -8,7 +8,10 @@ public:
             {
                 return true;
             }
-           
+            if(n<pow(2,i))
+            {
+                return false;
+            }
             
         }
         return false;
