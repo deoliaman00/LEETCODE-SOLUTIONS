@@ -2,19 +2,16 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums)
     {
-         int result = nums.size(); // result=3
-        int i=0;
-        // = [3,0,1]
-        
-        for(int num:nums)
+        int n=nums.size();
+        int a=0;
+        // [3,0,1]
+        for(auto i:nums)
         {
-            result= result ^ num; // 3^3=0   0^0=0     
-            result= result ^ i; // 0^0=0    0^1=1     
-            i++;
+            n= n^i;
+            n=n^a;
+            a++;
         }
-        
-        return result;
-        
+        return n;
         
     }
 };
