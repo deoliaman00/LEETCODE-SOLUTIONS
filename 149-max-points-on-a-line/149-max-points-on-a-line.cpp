@@ -21,6 +21,7 @@ public:
                         }
                     }
                      maxi=max(maxi,maxPoints);
+                    //cout<<maxPoints<<k+1<<endl;
                     
                 }
                
