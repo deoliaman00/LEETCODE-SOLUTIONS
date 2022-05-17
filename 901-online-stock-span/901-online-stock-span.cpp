@@ -1,20 +1,31 @@
 class StockSpanner {
 public:
+    StockSpanner() {}
+    stack<pair<int,int>>s;
+    int next(int price)
+    {
+        int constt=1;
+        while((s.size()>0)&& (s.top().first<=price))
+        {
+            constt+=s.top().second;
+            s.pop();
+        }
+        s.push({price,constt});
+        return constt;
+    }
+};
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner* obj = new StockSpanner();
+ * int param_1 = obj->next(price);
+ */
+
+// akshay sir approach
    // vector<int>qust;
     //stack<pair<int,int>>s;
     //vector<int>ans1,ans;
         
-    StockSpanner() {}
-     stack<pair<int, int>> s;
-    int next(int price) {
-        int res = 1;
-        while (!s.empty() && s.top().first <= price) {
-            res += s.top().second;
-            s.pop();
-        }
-        s.push({price, res});
-        return res;
-    }
+   
     
 //     int next(int price)
 //     {
@@ -62,10 +73,3 @@ public:
         
            
 //     }
-};
-
-/**
- * Your StockSpanner object will be instantiated and called as such:
- * StockSpanner* obj = new StockSpanner();
- * int param_1 = obj->next(price);
- */
