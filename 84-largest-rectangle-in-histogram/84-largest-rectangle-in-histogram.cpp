@@ -1,76 +1,126 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) 
+    //NSL-> NEAREST SMALLEST LEFT 
+    
+     vector<int>NSL(vector<int>test1)
     {
-       stack<int>checker;
-        int n=heights.size();
-        int leftMin[n],rightMin[n];
+        int n=test1.size();
+        stack<pair<int,int>>s;
+        vector<int>k;
+       //  0  1  2  3  4  5 
+      //   2  1  5  6  2  3
         
+     //   -1 -1  1  2  1  4
         for(int i=0;i<n;i++)
         {
-            while((checker.empty()==0)&&(heights[checker.top()]>=heights[i]))
+            if(s.empty()==true)
             {
-                checker.pop();
-                // two conditions are checked here 
-                // 1st
-                // if the stack is empty
-                // 2nd
-                // if the index which is inserted in the stack and the value at that 
-                // index is greater than incomong value then keep popping up
-                // all the elements so at last the element smaller than it will be 
-                // left in the stack which we will be inserting in the array left
+                k.push_back(-1);
             }
-            if(checker.empty()!=0)
+            else if(s.top().first<test1[i])
             {
-                leftMin[i]=0; // case unique if there is no element smaller than the val at height
-                                // then the 0th element will be its leftmostsmallest element
+                k.push_back(s.top().second);
             }
             else
             {
-                leftMin[i]= checker.top()+1;
-                // case unique if there is element smaller than the val at height
-                // then the top +1  element will be its leftmostsmallest element
+                while((s.empty()==false)&&(s.top().first>=test1[i]))
+                {
+                    s.pop();
+                }
+                if(s.empty()==true)
+                {
+                    k.push_back(-1);
+                }
+                else
+                {
+                    k.push_back(s.top().second);
+                }
             }
-            
-            checker.push(i); // at the last this element will be also inserted in the stack
+            s.push({test1[i],i});       
             
         }
-            
         
-        // clearing the stack back to zero
-        
-            while(checker.empty()==0)
-            {
-                checker.pop();
-            }
-        // rightMost array 
-        // we will find the element that is right most small than the current value
+        return k;
+    }
+     
+  vector<int>NSR(vector<int>test1)
+    {
+        int n=test1.size();
+        stack<pair<int,int>>s;
+        vector<int>k;
+       //  0  1  2  3  4  5 
+      //   2  1  5  6  2  3
+     
+     //    1  7  4  4  7  7   NSR    //    7  7  4  4  7  1   
+     
+     //   -1 -1  1  2  1  4   NSL
+     
+     
         for(int i=n-1;i>=0;i--)
         {
-            while((checker.empty()==0)&&(heights[checker.top()]>=heights[i]))
+            if(s.empty()==true)
             {
-                checker.pop();
+                k.push_back(n);
             }
-            
-            if(checker.empty()!=0)
+            else if(s.top().first<test1[i])
             {
-                rightMin[i]=n-1;
+                k.push_back(s.top().second);
             }
             else
             {
-                 rightMin[i]=checker.top()-1;
+                while((s.empty()==false)&&(s.top().first>=test1[i]))
+                {
+                    s.pop();
+                }
+                if(s.empty()==true)
+                {
+                    k.push_back(n);
+                }
+                else
+                {
+                    k.push_back(s.top().second);
+                }
             }
-            checker.push(i);
+            s.push({test1[i],i});       
+            
         }
         
-        int Maxi=0;
+        reverse(k.begin(),k.end());
+        
+        return k;
+    }
+    
+     vector<int>width(vector<int>A1,vector<int>A2)
+     {
+         int n=A1.size();
+         vector<int>wid(n);
+         for(int i=0;i<n;i++)
+         {
+             wid[i]=A2[i]-A1[i]-1;
+         }
+         
+         return wid;
+     }
+    
+    int largestRectangleArea(vector<int>& heights)
+    {
+        vector<int>A=NSL(heights);
+        vector<int>B=NSR(heights);
+        vector<int>C=width(A,B);
+        int maxi=INT_MIN;
+        int n=heights.size();
+        
         
         for(int i=0;i<n;i++)
         {
-            Maxi=max(Maxi,heights[i]*(rightMin[i]-leftMin[i]+1));
+            C[i]=heights[i]*C[i];
         }
         
-    return Maxi;
-    
+        for(int i=0;i<n;i++)
+        {
+            maxi=max(C[i],maxi);
+        }
+        
+        return maxi;
     }
 };
