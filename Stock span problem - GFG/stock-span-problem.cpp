@@ -26,14 +26,12 @@ class Solution
             {
                 ans1.push_back(-1);
             }
+            else if(s.top().first>a[i])
+            {
+                ans1.push_back(s.top().second);
+            }
             else
             {
-               if(s.top().first>a[i])
-                {
-                ans1.push_back(s.top().second);
-                }
-               else{
-               
                 while(!s.empty()&& s.top().first<=a[i])
                 {
                     s.pop();
@@ -46,8 +44,6 @@ class Solution
                 {
                     ans1.push_back(s.top().second);
                 }
-                   
-               }
             }
              s.push({a[i],i});
         }
