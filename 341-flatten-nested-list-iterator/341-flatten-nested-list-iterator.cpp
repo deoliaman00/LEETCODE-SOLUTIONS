@@ -42,6 +42,8 @@ public:
     bool hasNext() {
         return pos < v.size();
     }
+    
+    
 };
 
 /**
