@@ -1,28 +1,23 @@
 class Solution {
 public:
-    vector<int> productExceptSelf(vector<int>& nums) 
+    vector<int> productExceptSelf(vector<int>& nums)
     {
         int n=nums.size();
-        vector<int> product(n,0);
+        vector<int>ans(n,0);
         int flag=1;
-      //  product[0]=1;
-        int g=1;
         for(int i=0;i<n;i++)
         {
-            g*=nums[i]; // g=g*nums[i] ===>  1 2 6 24 
-            product[i]=g;
+            flag=flag*nums[i];
+            ans[i]=flag;
         }
-        //            i   
-        // eg= 1 2 3  4
-        //     1 2 6 12     flag=1
-        //            i
+        flag=1;
         for(int i=n-1;i>0;i--)
         {
-           product[i]=product[i-1]*flag;   //flag=12
-            flag= flag*nums[i];  // flag=12->24     
+            ans[i]= ans[i-1]*flag;
+            flag=flag*nums[i];
         }
-        product[0]=flag;
-        //   1 12 8 6
-        return product;
+        ans[0]=flag;
+
+        return ans;
     }
 };
