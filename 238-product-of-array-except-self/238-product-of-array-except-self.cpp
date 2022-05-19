@@ -9,7 +9,7 @@ public:
         int g=1;
         for(int i=0;i<n;i++)
         {
-            g*=nums[i];
+            g*=nums[i]; // g=g*nums[i] ===>  1 2 6 24 
             product[i]=g;
         }
         //            i   
