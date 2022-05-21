@@ -5,7 +5,7 @@ public:
     {
         if(color[c]==-1)
         {
-            color[c]=-1;
+            color[c]=1;
         }
         
         for(auto i:g[c])
@@ -13,7 +13,7 @@ public:
             if(color[i]==-1)
             {
                 color[i]=1-color[c];
-                if(!check(g,i,color)) return false;
+                if(check(g,i,color)==false) return false;
             }
             else if(color[i]==color[c])
             {
@@ -34,7 +34,7 @@ public:
         {
             if(color[i]==-1)
             {
-                if(!check(graph,i,color)) return false; // firstVector , currNode , colorNode of previous
+                if(check(graph,i,color)==false) return false; // firstVector , currNode , colorNode of previous
                 
                     // if(check(condition)==0)......if(check(condition)==false)
             
