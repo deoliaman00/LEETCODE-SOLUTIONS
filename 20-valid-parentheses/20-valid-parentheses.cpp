@@ -1,24 +1,58 @@
-class Solution
-{
+class Solution {
 public:
-    bool isValid(string s)
+    bool isValid(string sf)
     {
+        int N=sf.length();
+        if(N==1)
+        {return false;}
+        stack<char>s;
+        for(int i=0;i<N;i++)
+        {
+            if(sf[i]=='('||sf[i]=='['||sf[i]=='{')
+            {
+                s.push(sf[i]);
+            }
+            else
+            {
+                if(s.empty()==true)
+                {
+                    return false;
+                }
+                else if(sf[i]==')' && s.top()=='(')
+                {
+                    s.pop();
+                }
+                else if(sf[i]=='}' && s.top()=='{')
+                {
+                    s.pop();
+                }
+                else if(sf[i]==']' && s.top()=='[')
+                {
+                    s.pop();
+                }
+                else
+                {
+                    return false;
+                }
 
-     stack<char>st;
-     int size = s.size();
-     for(int i=0;i<size ;i++)
-     {
-       if(s[i]=='('|| s[i]=='{' || s[i]=='[') st.push(s[i]);
-     else
-     {
-     if(st.empty()) return 0;
-     else if(s[i]==')' && st.top()=='(') st.pop();
-     else if(s[i]=='}' && st.top()=='{') st.pop();
-     else if(s[i]==']' && st.top()=='[') st.pop();
-     else return 0;
-     }
-     }
-     return (st.empty()) ;
-     }
+            }
+        }
+        cout<<s.size();
+        return ((s.empty()==true)?true:false);
+    }
 };
-        
+/*
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+
+*/
