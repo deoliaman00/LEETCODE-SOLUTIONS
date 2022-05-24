@@ -53,18 +53,15 @@ class Solution
         {
             return false;
         }
-        
+                bool check=r1->data==r2->data;
         bool left=isIdentical(r1->left,r2->left);
         bool right=isIdentical(r1->right,r2->right);
-        bool check=r1->data==r2->data;
+
         if(check && left && right)
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+    return false;
         
     }
         
