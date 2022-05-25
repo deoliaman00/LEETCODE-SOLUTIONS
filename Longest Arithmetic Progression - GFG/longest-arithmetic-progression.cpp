@@ -9,34 +9,48 @@ using namespace std;
 
 class Solution{   
 public:
-    int lengthOfLongestAP(int nums[], int n) {
-        if(n<=2)return n;
-        int table[n][n];
-        int maxlen=2;
+    int lengthOfLongestAP(int A[], int n)
+    {
+        if(n<2)return n;
+        int dp[n][n];
+        int fina=2;
         for(int i=0;i<n;i++)
-        table[i][n-1]=2;
+        {
+            dp[i][n-1]=2;
+            
+        }
+        
         for(int j=n-1;j>=1;j--)
         {
             int i=j-1,k=j+1;
-            while(i>=0&&k<=n-1)
+            while(i>=0 && k<=n-1)
             {
-                if(nums[i]+nums[k] <2 *nums[j])
-                    k++;
-                else if(nums[i]+nums[k] > 2*nums[j])
-                { table[i][j]=2,i--;}
-                else
+                if(A[i]+A[k]==2*A[j])
                 {
-                    table[i][j]=table[j][k]+1;
-                    maxlen=max(maxlen,table[i][j]);
+                    dp[i][j]=dp[j][k]+1;
+                    fina=max(fina,dp[i][j]);
                     i--;
                     k++;
                 }
+                else if(A[i]+A[k]<2*A[j])
+                {
+                    k++;
+                }
+                else
+                {
+                     dp[i][j]=2;
+                    i--;
+                }
             }
             while(i>=0)
-            { table[i][j]=2,i--;}
+            {
+                dp[i][j]=2;
+                i--;
+            }
         }
-        return maxlen;
+        return fina;
     }
+    
 };
 
 // { Driver Code Starts.
