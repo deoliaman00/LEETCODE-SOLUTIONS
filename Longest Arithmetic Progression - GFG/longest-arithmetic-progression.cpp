@@ -23,7 +23,7 @@ public:
         for(int j=n-1;j>=1;j--)
         {
             int i=j-1,k=j+1;
-            while(i>=0 && k<=n-1)
+            while(i>=0 && k<n)
             {
                 if(A[i]+A[k]==2*A[j])
                 {
