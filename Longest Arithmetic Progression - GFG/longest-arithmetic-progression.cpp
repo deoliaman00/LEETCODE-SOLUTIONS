@@ -20,7 +20,7 @@ public:
             
         }
         
-        for(int j=n-1;j>=1;j--)
+        for(int j=n-1;j>=0;j--)
         {
             int i=j-1,k=j+1;
             while(i>=0 && k<n)
