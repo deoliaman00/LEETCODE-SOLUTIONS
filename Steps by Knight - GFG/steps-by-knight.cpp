@@ -12,58 +12,64 @@ class Solution
         }
         return false;
     }
-    
-    
+    //bool visitedCheck(vector<vector<bool>>visited,int i,int j,int N)
+    //{
+      //  if(i>=0  && i<N  && j>=0 && j<N && visited[i][j]==false)
+        //{
+         //   return true;
+        //}
+        //return false;
+    //}
     //Function to find out minimum steps Knight needs to reach target position.
 	int minStepToReachTarget(vector<int>&KnightPos,vector<int>&TargetPos,int N)
-	{// Code here
-	    int n = N;
-	    int tx = TargetPos[0]-1, ty = TargetPos[1]-1;
-	    int x1 = KnightPos[0]-1, y1 = KnightPos[1]-1;
+	{
+	    int si=KnightPos[0]-1,sj=KnightPos[1]-1;
+	    int ti=TargetPos[0]-1,tj=TargetPos[1]-1;
+	    if(ti==si && tj==sj) return 0;
 	    
-	    if(x1 == tx && y1 == ty) return 0;
 	    
-	    vector<vector<bool>>visited(n, vector<bool>(n, false));
+	    vector<vector<bool>>visited(N,vector<bool>(N,false));
+	   
+	    queue<pair<int,int>>q;
+	    q.push({si,sj});
+	     visited[si][sj]=true;
 	    
-	    queue<pair<int, int>>q;
-	    q.push({x1, y1});
-	    visited[x1][y1] = true;
 	    
-	    int ans = 0;
-	    while(!q.empty()){
-	        
-	        int size = q.size();
-	        ans++;
-	        while(size != 0){
-	            pair<int,int>p = q.front();
-	            q.pop();
-	            
-	            int xx = p.first;
-	            int yy = p.second;
-	            
-	            int ax[8] = {1, 1, -1, -1, 2, -2, 2, -2};
-	            int ay[8] = {2, -2, 2, -2, 1, 1, -1, -1};
-	            
-	            for(int i=0; i<8; i++){
-	                int nx = xx + ax[i];
-	                int ny = yy + ay[i];
-	                
-	                if(nx == tx && ny == ty) return ans;
-	                
-	                if(isValid(nx, ny, n, visited)){
-	                    visited[nx][ny] = true;
-	                    q.push({nx, ny});
-	                }
-	            }
+	   int ans=0;
+	   while(!q.empty())
+	   {
+	       int size=q.size();
+	       ans++;
+	       while(size!=0)
+	       {
+	           pair<int,int>p=q.front();
+	           q.pop();
+	           int xx=p.first;
+	           int yy=p.second;
 	           
-	            size--;
-	        }
-	    }
-	    
-	    
-	    return ans;
-	    }
-	
+	    int A[8]={1,1,-1,-1,2,-2,2,-2};
+	           int B[8]={2,-2,2,-2,1,1,-1,-1};
+	           
+	           
+	           for(int i=0;i<8;i++)
+	           {
+	               int xxx=xx+A[i];
+	               int yyy=yy+B[i];
+	               if(xxx==ti && yyy==tj)return ans;
+	               if(isValid(xxx,yyy,N,visited))
+	               {
+	                   visited[xxx][yyy]=true;
+                        q.push({xxx,yyy});
+	               }
+	               
+	           }
+	       
+	           size--;
+	       }
+	   
+	   }
+	   return ans;
+	}
 };
 
 // { Driver Code Starts.
