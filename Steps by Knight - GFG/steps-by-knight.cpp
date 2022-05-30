@@ -26,7 +26,8 @@ class Solution
 	    int si=KnightPos[0]-1,sj=KnightPos[1]-1;
 	    int ti=TargetPos[0]-1,tj=TargetPos[1]-1;
 	    if(ti==si && tj==sj) return 0;
-	    
+	      int A[8]={1,1,-1,-1,2,-2,2,-2};
+	           int B[8]={2,-2,2,-2,1,1,-1,-1};
 	    
 	    vector<vector<bool>>visited(N,vector<bool>(N,false));
 	   
@@ -47,8 +48,7 @@ class Solution
 	           int xx=p.first;
 	           int yy=p.second;
 	           
-	    int A[8]={1,1,-1,-1,2,-2,2,-2};
-	           int B[8]={2,-2,2,-2,1,1,-1,-1};
+	  
 	           
 	           
 	           for(int i=0;i<8;i++)
