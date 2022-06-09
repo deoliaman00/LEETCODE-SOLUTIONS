@@ -2,8 +2,12 @@ class Solution {
 public:
     int removePalindromeSub(string s)
     {
-         if(equal(s.begin(), s.begin() + s.size()/2, s.rbegin())) return 1;
-        return 2;
-        
+        string p=s;
+        reverse(p.begin(),p.end());
+        int i=s.length();
+        if(i==0)return 0;
+        else if(s==p)return 1;
+        else
+            return 2;
     }
 };
