@@ -27,11 +27,10 @@ public:
              take= check(arr,n-1,sum-arr[n],dp);
          }
          
-         return dp[n][sum]=take|notTake;
+         return dp[n][sum]=(take|notTake);
     }
     bool isSubsetSum(vector<int>arr, int sum)
-    {
-         int n=arr.size();
+    { int n=arr.size();
         vector<vector<int>>dp(n,vector<int>(sum+1,-1));
        
          return check(arr,n-1,sum,dp);
