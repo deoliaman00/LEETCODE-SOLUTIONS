@@ -38,6 +38,7 @@ public:
                 else
                 {
                     int up=grid[i][j];
+                    int down=grid[i][j];
                      if(i>0)
                     {
                         up+=dp[i-1][j];        
@@ -47,7 +48,7 @@ public:
                         up+=1e9;
                     }
                     
-                    int down=grid[i][j];
+                   
                     if(j>0)
                     {
                         down+=dp[i][j-1];
