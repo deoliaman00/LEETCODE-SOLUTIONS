@@ -38,9 +38,42 @@ public:
     }
     bool isMatch(string s, string p) 
     {
-        int s1Length=p.size();
-        int s2Length=s.size();
-        vector<vector<int>>dp(s1Length+1,vector<int>(s2Length+1,-1));
-        return f(s1Length,s2Length,p,s,dp);
+       int n1=p.size();
+        int n2=s.size();
+        vector<vector<bool>>dp(n1+1,vector<bool>(n2+1,false));
+        
+        dp[0][0]=true;
+        for(int j=1;j<=n2;j++)
+        {
+            dp[0][j]=false;
+        }
+        
+        for(int i=1;i<=n1;i++)
+        {
+            dp[i][0]=check(p,i);
+        }
+        
+       for(int i=1;i<=n1;i++)
+       {
+           for(int j=1;j<=n2;j++)
+           {
+                if(p[i-1]==s[j-1] || p[i-1]=='?')
+                {
+                    dp[i][j]=dp[i-1][j-1];
+                }
+            else{
+                if(p[i-1]=='*')
+                {
+                    dp[i][j]=dp[i-1][j]||dp[i][j-1];
+                }
+                else{
+                    dp[i][j]=false;
+                }             
+                
+            }
+           }
+       }
+               
+        return dp[n1][n2];
     }
 };
