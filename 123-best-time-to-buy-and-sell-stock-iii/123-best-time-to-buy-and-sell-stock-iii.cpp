@@ -33,7 +33,8 @@ public:
     {
         int n=prices.size();
         int cap=2;
-        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(3,0)));
+        vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(3,0))); // 3d dp -> 2d dp 
+        vector<vector<int>>after(2,vector<int>(3,0)),curr(2,vector<int>(3,0));
         
         for(int indx=n-1;indx>=0;indx--)
         {
@@ -48,22 +49,23 @@ public:
                             // op2> we didnt buyed this stock now send 0 to buy again
 
 
-                             op2=0+dp[indx+1][0][cap];
-                            op1=-prices[indx]+dp[indx+1][1][cap];
+                             op2=0+after[0][cap];
+                            op1=-prices[indx]+after[1][cap];
                             profit=max(op1,op2);
                         }
                         if(buy==1)
                         {
 
-                             op2=0+dp[indx+1][1][cap];
-                             op1=prices[indx]+dp[indx+1][0][cap-1];
+                             op2=0+after[1][cap];
+                             op1=prices[indx]+after[0][cap-1];
                             profit=max(op1,op2);
                         }
-                    dp[indx][buy][cap]=profit;
+                    curr[buy][cap]=profit;
                 }
             }
+            after=curr;
         }
         
-        return dp[0][0][cap];
+        return after[0][cap];
     }
 };
