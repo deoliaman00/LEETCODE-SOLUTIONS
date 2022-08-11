@@ -1,41 +1,33 @@
 class Solution {
 public:
-    vector<vector<int>> sub;
-    set<vector<int>>c;
-    
-    void subsets(vector<int>ip, vector<int>op)
+     vector<int>nl;
+     set<vector<int>>st;
+    void f(int indx,vector<vector<int>>&sub,vector<int>& nums) 
     {
-        if(ip.size()==0)
-        {  
-            if(c.find(op)==c.end())
+        
+        if(indx<0)
+        {
+            if(st.find(nl)==st.end())
             {
-                c.insert(op);
-                sub.push_back(op);
+                 sub.push_back(nl);
+                 st.insert(nl);
             }
+           
             return;
         }
-        
-        vector<int>op1=op;
-        
-        vector<int>op2=op;
-        
-        op2.push_back(ip[0]);
-        
-        ip.erase(ip.begin()+0);
-        
-        subsets(ip,op1);
-        subsets(ip,op2);
-        return;
-        
-        
+       
+        nl.push_back(nums[indx]);
+        f(indx-1,sub,nums);
+        nl.pop_back();
+        f(indx-1,sub,nums);
     }
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) 
+    vector<vector<int>> subsetsWithDup(vector<int>& nums)
     {
         
-        vector<int>oup; sort(sub.begin(),sub.end());
+        int n=nums.size();
         sort(nums.begin(),nums.end());
-        subsets(nums,oup);
-       
+        vector<vector<int>> sub;
+        f(n-1,sub,nums);
         return sub;
         
     }
