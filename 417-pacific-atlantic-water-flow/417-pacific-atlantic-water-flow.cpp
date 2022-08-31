@@ -1,28 +1,56 @@
+#define vc2 vector<vector<int>>
+#define vc1 vector<int>
+
+
 class Solution {
 public:
-    int m, n;
-    vector<vector<int> > ans;
-    vector<vector<bool> > atlantic, pacific;
-    queue<pair<int, int> > q;
-    vector<vector<int> > pacificAtlantic(vector<vector<int>>& mat) {
-        if(!size(mat)) return ans;
-        m = size(mat), n = size(mat[0]);
-        atlantic = pacific = vector<vector<bool> >(m, vector<bool>(n, false));
-        for(int i = 0; i < m; i++) bfs(mat, pacific, i, 0), bfs(mat, atlantic, i, n - 1);
-        for(int i = 0; i < n; i++) bfs(mat, pacific, 0, i), bfs(mat, atlantic, m - 1, i);             
-        return ans;
+    void func(vc2 &heights,int i,int j,int prev,vc2 &ocean)
+    {
+        if(i<0 || j<0 || i>=heights.size() || j>=heights[0].size())
+            return;
+        if(ocean[i][j]==1)
+            return;
+        if(heights[i][j]<prev)
+            return;
+        
+        ocean[i][j]=1;
+        func(heights,i+1,j,heights[i][j],ocean);
+        func(heights,i-1,j,heights[i][j],ocean);
+        func(heights,i,j+1,heights[i][j],ocean);
+        func(heights,i,j-1,heights[i][j],ocean);
+        
     }
-    void bfs(vector<vector<int> >& mat, vector<vector<bool> >& visited, int i, int j){        
-        q.push({i, j});
-        while(!q.empty()){
-            tie(i, j) = q.front(); q.pop();
-            if(visited[i][j]) continue;
-            visited[i][j] = true;
-            if(atlantic[i][j] && pacific[i][j]) ans.push_back(vector<int>{i, j});
-            if(i + 1 <  m && mat[i + 1][j] >= mat[i][j]) q.push({i + 1, j});
-            if(i - 1 >= 0 && mat[i - 1][j] >= mat[i][j]) q.push({i - 1, j});
-            if(j + 1 <  n && mat[i][j + 1] >= mat[i][j]) q.push({i, j + 1});
-            if(j - 1 >= 0 && mat[i][j - 1] >= mat[i][j]) q.push({i, j - 1});
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights)
+    {
+         int n=heights.size();
+        int n2=heights[0].size();
+        vector<vector<int>>pf(n,vector<int>(n2,0)),atc(n,vector<int>(n2,0));
+        vc2 ans;
+        for(int r=0;r<heights.size();r++) // 0 1 2 3 4
+        {
+            func(heights,r,0,INT_MIN,pf); // 00 10 20 30 40
+            func(heights,r,heights[0].size()-1,INT_MIN,atc); // 04 14 24 34 44
         }
+        for(int c=0;c<heights[0].size();c++)
+        {
+            func(heights,0,c,INT_MIN,pf);// 00 01 02 03 04
+            func(heights,heights.size()-1,c,INT_MIN,atc); // 04 14 24 34 44
+        }
+        for(int i=0;i<heights.size();i++)
+        {
+            for(int j=0;j<heights[0].size();j++)
+            {
+                if(pf[i][j]==1 && atc[i][j]==1 )
+                {
+                    vector<int>v(2);
+                    v[0]=i;
+                    v[1]=j;
+                    ans.push_back(v);
+                }
+            }
+        }
+        return ans;
+        
+        
     }
 };
