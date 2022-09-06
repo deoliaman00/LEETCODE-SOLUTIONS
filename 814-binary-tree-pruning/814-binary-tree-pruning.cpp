@@ -10,35 +10,18 @@
  * };
  */
 class Solution {
-    int dfs(TreeNode* root)
-    {
-        if( root == NULL ) return 0;
-        
-        int count = root->val == 1 ? 1 : 0;
-        
-        int left = dfs(root->left);
-        int right = dfs(root->right);
-        
-        if( left == 0)
-        {
-            
-            
-            root->left = NULL;
-        }
-        
-        if(right == 0)
-        {
-            root->right = NULL;
-        }
-        
-        return count + left + right;
-    }
 public:
-    TreeNode* pruneTree(TreeNode* root) {
-        if(root == NULL) return root;
-    
-        int one = dfs(root);
+    TreeNode *f(TreeNode *root)
+    {
+        if(root==NULL)return NULL;
+        root->left=f(root->left);
+        root->right=f(root->right);
+        if(root->val==0 && root->left==NULL && root->right==NULL)return NULL;
         
-        return one == 0 ? NULL : root ;
+        
+        return root;
+    }
+    TreeNode* pruneTree(TreeNode* root) {
+        return f(root);
     }
 };
