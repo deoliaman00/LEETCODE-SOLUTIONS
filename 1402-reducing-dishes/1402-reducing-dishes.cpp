@@ -19,9 +19,9 @@ public:
     {
         int n=sat.size();
         sort(sat.begin(),sat.end());
-        vector<vector<int>>dp(n,vector<int>(n+2,-1));
+        vector<vector<int>>dp(n,vector<int>(n+1,-1));
         int ans=f(0,1,n,sat,dp);
-        return ans;
         
+        return ans;
     }
 };
