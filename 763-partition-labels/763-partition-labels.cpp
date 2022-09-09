@@ -1,28 +1,26 @@
 class Solution {
 public:
-    vector<int> partitionLabels(string s)
+    vector<int> partitionLabels(string s) 
     {
-           unordered_map<char,int>mp;
-        // filling impact of character's
-        for(int i = 0; i < s.size(); i++){
-            char ch = s[i];
-            mp[ch] = i;
+        map<char,int>mp;
+        for(int i=0;i<s.size();i++)
+        {
+            mp[s[i]]=i;
         }
-        // making of result
-        vector<int> res;
-        int prev = -1;
-        int maxi = 0;
-        
-        for(int i = 0; i < s.size(); i++){
-            maxi = max(maxi, mp[s[i]]);
-            if(maxi == i){
-                // partition time
-                res.push_back(maxi - prev);
-                prev = maxi;
+        int maxi=INT_MIN;
+        vector<int>ans;
+        int sI=0,mI=0;
+        for(int i=0;i<s.size();i++)
+        {
+            mI=max(mI,mp[s[i]]);
+            if(i==mI)
+            {
+                ans.push_back(mI-sI+1);
+                sI=i+1;
             }
         }
-        return res;
         
+        return ans;
         
     }
 };
