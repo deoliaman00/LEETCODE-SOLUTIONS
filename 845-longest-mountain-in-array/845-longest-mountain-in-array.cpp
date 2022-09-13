@@ -1,38 +1,30 @@
 class Solution {
 public:
-    int longestMountain(vector<int>& A) 
+    int longestMountain(vector<int>& arr) 
     {
-        int maxLength = 0;
-        int i = 1;
-        
-        while (i < A.size()) {
-            int increasing = 0, decreasing = 0;
+        int indx=1;
+        int maxi=0;
+        int n=arr.size();
+        while(indx<n)
+        {
+            int i=0,j=0;
             
-            while(i < A.size() && A[i - 1] < A[i]) i++, increasing++;
-            while(i < A.size() && A[i - 1] > A[i]) i++, decreasing++;
             
-            if (increasing > 0 && decreasing > 0) maxLength = max(maxLength, increasing + decreasing + 1);
+            while(indx<n && arr[indx-1]<arr[indx])i++,indx++;
+           // 1=2=3=4=5=6=7
             
-            while(i < A.size() && A[i - 1] == A[i]) i++;
+            
+            while(indx<n && arr[indx-1]>arr[indx])j++,indx++;
+            // 7 6 5 4 3 2 1
+            
+            
+            if(i>0 && j>0)
+            {
+                maxi=max(maxi,i+j+1);
+            }
+            
+            while(indx<n && arr[indx-1]==arr[indx])indx++;
         }
-        return maxLength;
-//         int j=1;
-//         int n=arr.size();
-//         int maxi=0;
-//         while(j<n)
-//         {
-//             int inc=0,dec=0;
-//             while(j<n && arr[j]>arr[j-1])inc++,j++;
-//             while(j<n && arr[j]<arr[j-1])dec++,j++;
-//             if(inc>0 && dec>0)
-//             {
-//                  maxi=max(maxi,inc+dec+1);
-//             }
-           
-//             j++;
-//         }
-        
-//         return maxi;
-        
+        return maxi;
     }
 };
