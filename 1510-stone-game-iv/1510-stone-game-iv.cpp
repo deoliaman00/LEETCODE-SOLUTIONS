@@ -20,7 +20,8 @@ public:
     bool winnerSquareGame(int n)
     {
         vector<int>dp(n+1,-1);
-        return f(n,dp);
+        if(f(n,dp)==1)return true;
+        else return false;
        
         
     }
