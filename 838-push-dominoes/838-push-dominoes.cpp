@@ -1,83 +1,100 @@
 class Solution {
 public:
-    string pushDominoes(string dominoes) {
-        
-      int n = dominoes.size();
-      vector<int>left(n,0);
-      vector<int>right(n,0);
-
-      int time = 1;
-      char prev = '.';
-
-      for(int i=0;i<n;i++)
-      {
-          if(dominoes[i] == 'R')
-          {
-              prev = 'R';
-              time = 1;
-              continue;
-          }
-         else  if(dominoes[i]=='L')
-          {
-              prev = 'L';     
-          }
-          else if(prev == 'R' && dominoes[i]=='.')
-          {
-             right[i] = time; 
-             time++;
-          }
-      }
-
-     prev = '.';
-    time = 1;
-    for(int i = n-1;i>=0 ; i--)
+    string pushDominoes(string d) 
     {
-        if(dominoes[i] == 'L')
-          {
-              prev = 'L';
-              time = 1;
-              continue;
-          }
-      else if(dominoes[i]=='R')
-          {
-              prev = 'R';     
-          }
-
-          else if(prev == 'L' && dominoes[i]=='.')
-          {
-             left[i] = time; 
-              time++;
-          }  
-    }
-    string ans = "";
+        int n=d.size();
+        vector<int>lC(n,0);
+        vector<int>rC(n,0);
+    
+        // left->right
+       // 0 to n
+        int time=1;
+        char prev='.';
         for(int i=0;i<n;i++)
         {
-            if(left[i]==0 && right[i] == 0)
+            if(d[i]=='R')
             {
-                ans += dominoes[i];
+                prev='R';
+                 time=1;
+                continue;                
             }
-            else if(left[i] == 0)
+            else if(d[i]=='L')
             {
-                ans += 'R';
+               
+                prev='L';
             }
-            else if(right[i] == 0)
+            else if(d[i]=='.' && prev=='R')
             {
-                ans += 'L';
+                lC[i]=time;
+                time++;
+                prev='R';
+            }            
+        }
+        time=1;
+        prev='.';
+        
+        for(int i=n;i>=0;i--)
+        {
+            if(d[i]=='L')
+            {
+                prev='L';
+                 time=1;
+                continue;                
             }
-            else if(left[i] == right[i])
+            else if(d[i]=='R')
             {
-                ans += '.';
+               
+                prev='R';
             }
-            else if(left[i]<right[i])
+            else if(d[i]=='.' && prev=='L')
             {
-                ans += 'L';
+                rC[i]=time;
+                time++;
+                prev='L';
+            }            
+        }
+        
+        string op="";
+        
+        for(int i=0;i<n;i++)
+        {
+            if(rC[i]==0 && lC[i]==0)
+            {
+                op+=d[i];
+            }
+            else if(rC[i]==lC[i])
+            {
+                op+='.';
+            }
+            else if(lC[i]==0)
+            {
+                op+='L';
+            }
+            else if(rC[i]==0)
+            {
+                op+='R';
+            }
+            else if(rC[i]<lC[i])
+            {
+                op+='L';
             }
             else 
             {
-                ans += 'R';
+                op+='R';
             }
         }
-      return ans;  
+        
+        return op;     
         
     }
 };
+
+
+/*
+
+Input: 
+n = 0 1 2 3 4 5 6 7 8 9 10 11 12 13
+d = . L . R . . . L R . .  L  .  .
+t:  L L . R R . L L R R L  L  .  .
+
+*/
