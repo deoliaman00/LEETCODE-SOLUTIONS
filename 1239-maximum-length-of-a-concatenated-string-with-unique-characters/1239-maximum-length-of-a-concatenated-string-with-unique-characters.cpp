@@ -1,44 +1,64 @@
 class Solution {
 public:
-    void fun(int idx,vector<string>& arr,vector<string>& temp,int& maxlength)
+    bool cmp(string &str,vector<int>&arr)
     {
-        if(idx==arr.size())
+         vector<int>count(26,0);
+        
+        for(int i=0;i<str.size();i++)
         {
-            string s1="";
-            for(int i=0;i<temp.size();i++)
-            {
-                s1+=temp[i];
-            }
-            int freq[26]={0};
-            for(int i=0;i<s1.size();i++)
-            {
-                freq[s1[i]-'a']++;
-            }
-            int cnt=0;
-            for(int i=0;i<26;i++)
-            {
-                if(freq[i]==1)
-                {
-                    cnt++;
-                }
-                else if(freq[i]>1)
-                {
-                    cnt=0;
-                    return;
-                }
-            }
-            maxlength=max(maxlength,cnt);
-            return;
+            if(count[str[i]-'a']==1)return false;
+        count[str[i]-'a']=1;
+        }       
+        for(int i=0;i<str.size();i++)
+        {
+            if(arr[str[i]-'a']==1)return false;
         }
-        temp.push_back(arr[idx]);
-        fun(idx+1,arr,temp,maxlength);
-        temp.pop_back();
-        fun(idx+1,arr,temp,maxlength);
+        
+        return true;        
     }
-    int maxLength(vector<string>& arr) {
-        vector<string> temp;
-        int maxlength=0;
-        fun(0,arr,temp,maxlength);
-        return maxlength;
+    
+    
+    int func(int i,vector<string>&arr,vector<int>&Count,int &len)
+    {
+        if(i==arr.size())
+        {
+            return len;
+        }
+        string str=arr[i];
+        if(cmp(str,Count)==false)
+        {
+            return func(i+1,arr,Count,len);
+        }
+        else
+        {
+            // pick1
+            for(int j=0;j<str.size();j++)
+            {
+                Count[str[j]-'a']=1;
+            }
+            len+=str.size();
+            int pick=func(i+1,arr,Count,len);
+            
+            
+            // pick2
+            for(int j=0;j<str.size();j++)
+            {
+                Count[str[j]-'a']=0;
+            }
+            len-=str.size();
+            int notpick=func(i+1,arr,Count,len);
+            
+            
+            return max(pick,notpick);
+        }
+        
+    }
+    
+    int maxLength(vector<string>& arr) 
+    {   
+        vector<int>count(26,0);
+        int len=0;
+       return func(0,arr,count,len);
+        
     }
 };
