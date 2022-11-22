@@ -1,47 +1,62 @@
 class Solution {
 public:
-   int calculate(string s) {
-       stack<pair<int,int>> st; // pair(prev_calc_value , sign before next bracket () )
-       
-       long long int sum = 0;
-       int sign = +1;
-       
-       for(int i = 0 ; i < s.size() ; ++i)
-       {
-           char ch = s[i];
-           
-           if(isdigit(ch))
-           {
-               long long int num = 0;
-               while(i < s.size() and isdigit(s[i]))
-               {
-                   num = (num * 10) + s[i] - '0';
-                   i++;
-               }
-               i--; // as for loop also increase i , so if we don't decrease i here a sign will be skipped
-               sum += (num * sign);
-               sign = +1; // reseting sign
-           }
-           else if(ch == '(')
-           {
-               // Saving current state of (sum , sign) in stack
-               st.push(make_pair(sum , sign));
-               
-               // Reseting sum and sign for inner bracket calculation
-               sum = 0; 
-               sign = +1;
-           }
-           else if(ch == ')')
-           {
-               sum = st.top().first + (st.top().second * sum);
-               st.pop();
-           }
-           else if(ch == '-')
-           {
-               // toggle sign
-               sign = (-1 * sign);
-           }
-       }
-       return sum;
-   }
+    int calculate(string s)
+    {
+        int N=s.size();
+        stack<int>st;
+        // cases for the calculation
+        // case 1:- +
+        // case 2:- -
+        // case 3:- (
+        // case 4:- )
+        
+        // case 5:- whenever there is a no try to get this no and do the calc with
+        // the current sign and also extract the number out of this.
+        
+        int sign=1;// by def. addition is the key
+        int sum=0;
+        for(int i=0;i<N;i++)
+        {
+            if(s[i]>='0' && s[i]<='9')
+            {
+                int num=0;
+                while(s[i]>='0' and s[i]<='9' and i<N)
+                {
+                    int temp=s[i]-'0';// therefore the no has been captured
+                    // but if it is a 2digit or 3 digit no then what ?
+                    num= num*10+ temp;
+                    
+                    i++;
+                }
+                
+                sum= sum+ num*sign;
+                i--;
+                
+            }
+            else if(s[i]=='(')
+            {
+                st.push(sum);
+                st.push(sign);
+                sum=0;
+                sign=+1;
+            }
+            else if(s[i]==')')
+            {
+                sum=sum*st.top();st.pop();
+                sum+=st.top();st.pop();
+            }
+            else if(s[i]=='-')
+            {
+              sign=-1;  
+            }
+            else if(s[i]=='+')
+            {
+                    sign=+1;
+            }
+            
+        }
+        
+        return sum;
+        
+    }
 };
