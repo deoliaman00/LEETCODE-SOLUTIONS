@@ -8,9 +8,9 @@
 
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
 
-<pre><strong><span style="font-size:18px">Input:</span></strong>
+<pre style="background-color: rgb(18, 18, 18) !important; color: rgba(237, 237, 237, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><strong><span style="font-size:18px">Input:</span></strong>
 
-<img alt="" src="https://media.geeksforgeeks.org/img-practice/booker1-1655493978.png" style="height:348px; width:386px">
+<img alt="" src="https://media.geeksforgeeks.org/img-practice/booker1-1655493978.png" style="height: 348px; width: 386px; filter: brightness(0.75);">
 <span style="font-size:18px"><strong>Output:</strong></span>
 <span style="font-size:18px">2 4 5 6</span>
 <span style="font-size:18px"><strong>Explanation:</strong></span>
@@ -23,9 +23,9 @@ lead to either node 5 or 6.</span>
 
 <p><strong><span style="font-size:18px">Example 2:</span></strong></p>
 
-<pre><strong><span style="font-size:18px">Input:</span></strong>
+<pre style="background-color: rgb(18, 18, 18) !important; color: rgba(237, 237, 237, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><strong><span style="font-size:18px">Input:</span></strong>
 
-<strong><span style="font-size:18px"><img alt="" src="https://media.geeksforgeeks.org/img-practice/booker2-1655494315.png"></span></strong>
+<strong><span style="font-size:18px"><img alt="" src="https://media.geeksforgeeks.org/img-practice/booker2-1655494315.png" style="filter: brightness(0.75);"></span></strong>
 <strong><span style="font-size:18px">Output:</span></strong>
 <span style="font-size:18px">3</span>
 <strong><span style="font-size:18px">Explanation:</span></strong>
