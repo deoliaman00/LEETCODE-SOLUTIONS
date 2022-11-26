@@ -10,66 +10,45 @@ using namespace std;
 
 class Solution {
   public:
-  bool dfs(vector<int>adj[],int vis[],int Previs[],int check[],int node)
-  {
-      // on coming inside the dfs loop function
-      vis[node]=1;
-      Previs[node]=1;
-      check[node]=0;
-      for(auto it:adj[node])
-      {
-          if(!vis[it])
-          {
-              if(dfs(adj,vis,Previs,check,it)==true)
-              {
-                  check[it]=0;
-                  return true;// cycle encountered so cancel the change
-              }
-                  
-          }
-          else if(Previs[it]!=0)
-          {   check[it]=0;
-              return true;// cycle encountered so cancel the change
-          }
-      }
-      // if the above whole loop has been done and dusted so now we need to mark it as the non cycle node
-      check[node]=1;
-      Previs[node]=0;// change the status here too
-      return false;// at last returning the result that no cycle existed.
-  }
     vector<int> eventualSafeNodes(int V, vector<int> adj[]) 
     {
-        // so now the method to solve this question is that 
-        // first we make sure we get all the nodes that are in the cycle
-        // the special case over here is that it is a directed graph so ]
-        // we have to use a little differnt method
-        
-        // step1:-
-        // checking the node and the cycles
+        vector<int>adjR[V];
         int vis[V]={0};
-        int Previs[V]={0};
-        int check[V]={0};
-        vector<int>ansV;
-        
         for(int i=0;i<V;i++)
         {
-            if(!vis[i])
+            for(auto it:adj[i])
             {
-                dfs(adj,vis,Previs,check,i);
+                adjR[it].push_back(i);
+                    vis[i]++;
                 
             }
         }
-        
+        queue<int>qt;
+        vector<int>ans;
         for(int i=0;i<V;i++)
         {
-            if(check[i]==1){
-                ansV.push_back(i);
+            if(vis[i]==0)
+            {
+                qt.push(i);
             }
         }
         
-        
-        
-        return ansV;
+        while(!qt.empty())
+        {
+            int node=qt.front();
+            ans.push_back(node);
+            qt.pop();
+            for(auto it:adjR[node])
+            {
+                vis[it]--;
+                if(vis[it]==0)
+                {
+                    qt.push(it);
+                }
+            }
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
         
     }
 };
