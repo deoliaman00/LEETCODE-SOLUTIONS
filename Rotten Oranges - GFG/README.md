@@ -38,7 +38,7 @@ You don't need to read or print anything, Your task is to complete the function&
 &nbsp;</p>
 
 <p><span style="font-size:18px"><strong>Expected Time Complexity:&nbsp;</strong>O(n*m)<br>
-<strong>Expected Auxiliary Space:&nbsp;</strong>O(n)</span><br>
+<strong>Expected Auxiliary Space:&nbsp;</strong>O(n*m)</span><br>
 &nbsp;</p>
 
 <p><span style="font-size:18px"><strong>Constraints:</strong><br>
