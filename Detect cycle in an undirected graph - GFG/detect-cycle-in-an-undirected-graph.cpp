@@ -5,70 +5,47 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  // type solution 1
-  bool bfs(int node,vector<int>&vis,vector<int>adj[])
-  {
-      queue<pair<int,int>>qt;
-      qt.push({node,-1});
-      vis[node]=1;
-      while(!qt.empty())
-      {
-          int nt=qt.front().first;
-          int ntPapa=qt.front().second;
-          qt.pop();
-          for(auto it:adj[nt])
-          {
-              if(vis[it]==0)
-              {
-                  qt.push({it,nt});
-                  vis[it]=1;
-              }
-              else if(it!=ntPapa)
-              {
-                  return true;
-              }
-          }
-      }
-      
-      return false;
-  }
-  
-  //  lets talk dfs
-  bool dfs(int node,int parent,vector<int>adj[],vector<int>&vis)
-  {
-      vis[node]=1;
-      for(auto it:adj[node])
-      { 
-          if(vis[it]==0)
-          {
-               if(dfs(it,node,adj,vis)==true)return true;
-          }
-          else
-          {
-              if(parent!=it)return true;
-          }
-      }
-      return false;
-  }
-  
     // Function to detect cycle in an undirected graph.
+    bool bfs(int src,int V,vector<int>adj[],int vis[])
+    {
+        vis[src]=1;
+        queue<pair<int,int>>qt;
+        qt.push({src,-1});
+        while(!qt.empty())
+        {
+            int node=qt.front().first;
+            int parent=qt.front().second;
+            qt.pop();
+            for(auto it:adj[node])
+            {
+                if(!vis[it])
+                {
+                    vis[it]=1;
+                    qt.push({it,node});
+                }
+                else
+                {
+                    if(parent!=it)return true;
+                }
+            }
+        }
+        return false;
+        
+        
+    }
     bool isCycle(int V, vector<int> adj[]) 
     {
-        vector<int>vis(V,0);
-        vis[0]=1;
+        
+        int visited[V]={0};
         for(int i=0;i<V;i++)
         {
-            if(!vis[i])
+            if(!visited[i])
             {
-                if(dfs(i,-1,adj,vis)==true)
-                {
-                    return true;
-                }
+                if(bfs(i,V,adj,visited)==true)return true;
             }
         }
         
         return false;
-        
     }
 };
 
