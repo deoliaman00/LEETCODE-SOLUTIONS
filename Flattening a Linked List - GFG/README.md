@@ -13,7 +13,7 @@ For more clarity have a look at the printList() function in the driver code.</sp
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre style="background-color: rgb(19, 19, 19) !important; color: rgba(239, 239, 239, 0.87) !important; border-color: rgb(162, 162, 162) !important;"><span style="font-size:18px"><strong>Input:
+<pre style="background-color: rgb(22, 22, 22) !important; color: rgba(242, 242, 242, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><span style="font-size:18px"><strong>Input:
 </strong>5 -&gt; 10 -&gt; 19 -&gt; 28
 |     |     |     | 
 7     20    22   35
@@ -33,7 +33,7 @@ node in a single level.<strong>
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre style="background-color: rgb(19, 19, 19) !important; color: rgba(239, 239, 239, 0.87) !important; border-color: rgb(162, 162, 162) !important;"><span style="font-size:18px"><strong>Input:</strong>
+<pre style="background-color: rgb(22, 22, 22) !important; color: rgba(242, 242, 242, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><span style="font-size:18px"><strong>Input:</strong>
 5 -&gt; 10 -&gt; 19 -&gt; 28
 |          |                
 7          22   
