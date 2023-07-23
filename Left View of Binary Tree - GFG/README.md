@@ -14,7 +14,7 @@
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre style="background-color: rgb(22, 22, 22) !important; color: rgba(242, 242, 242, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>&nbsp;  1
 &nbsp;/&nbsp; \
 3&nbsp; &nbsp; 2
@@ -24,8 +24,8 @@
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre style="background-color: rgb(22, 22, 22) !important; color: rgba(242, 242, 242, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><span style="font-size:18px"><strong>Input:
-</strong><img alt="" src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190221103723/leftview.jpg" style="height: 272px; width: 285px; filter: brightness(0.75);">
+<pre><span style="font-size:18px"><strong>Input:
+</strong><img alt="" src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190221103723/leftview.jpg" style="height:272px; width:285px">
 <strong>Output: </strong>10 20 40
 </span></pre>
 
