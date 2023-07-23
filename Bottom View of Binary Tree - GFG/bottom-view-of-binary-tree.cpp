@@ -97,53 +97,35 @@ class Solution {
   public:
     vector <int> bottomView(Node *root)
     {
-        // STEP1 : MAKING A VECTOR FOR STORING ANS
-        vector<int>ans;
-        // STEP2: RETURING THE VECTOR IF ALREADY EMPTY
-        if(root==NULL)return ans;
-        
-        
-        // STEP3: MAP WHICH WILL ARRANGE THE NODES IN SORTED ORDER
         map<int,int>mp;
-        
-        // STEP4: QUEUE IS USED TO STORE THE NODE AND TRAVERSE IT AND FIND THE NODES
         queue<pair<Node*,int>>qt;
-        // STEP5: NODE INSERTED IN THE QUEUE
-        qt.push({root,0});
+        qt.push(make_pair(root,0));
         
-        
-        // STEP 6: TILL THE QUEUE IS NOT EMPTY KEEP RUNNING
         while(!qt.empty())
         {
-                auto temp=qt.front();
-                // STEP7: THE NODE IS TAKEN AND STORED EG:- {2,-2}
-                
-                qt.pop();
-                // STEP 8: FOR CHECKING THAT THE NODE HAS A LEFT OR A RIGHT
-                Node *val=temp.first;
-                int tval=val->data;
-                // STEP 9: TVAL WILL HAVE THE VALUE OF THE NODE
-                // STEP 10: LVL WILL HAVE THE LEVELOF THE NODE
-                
-                int level=temp.second;
-                mp[level]=tval;
-                if(val->left!=NULL)
-                {
-                    qt.push({val->left,level-1});
-                }
-                if(val->right!=NULL)
-                {
-                    qt.push({val->right,level+1});
-                }
-                
+            auto it=qt.front();
+            qt.pop();
+            Node *temp=it.first;
+            int diff=it.second;
+           
+            mp[diff]=temp->data;
+          
+            if(temp->left)
+            {
+                qt.push(make_pair(temp->left,diff-1));
+            }
+            if(temp->right)
+            {
+                qt.push(make_pair(temp->right,diff+1));
+            }
         }
-        
+        vector<int>ans;
         for(auto it:mp)
         {
             ans.push_back(it.second);
         }
-        
         return ans;
+        // Your Code Here
     }
 };
 
