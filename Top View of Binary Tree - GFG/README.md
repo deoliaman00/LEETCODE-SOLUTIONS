@@ -14,7 +14,7 @@ For ex -&nbsp;<strong>1 2 3 N 4 5 N 6 N 7 N 8 N 9 N N N N N</strong> will give&n
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre style="background-color: rgb(19, 19, 19) !important; color: rgba(239, 239, 239, 0.87) !important; border-color: rgb(162, 162, 162) !important;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>&nbsp;     1
   &nbsp;/&nbsp;&nbsp;&nbsp; \
   2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3
@@ -23,7 +23,7 @@ For ex -&nbsp;<strong>1 2 3 N 4 5 N 6 N 7 N 8 N 9 N N N N N</strong> will give&n
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre style="background-color: rgb(19, 19, 19) !important; color: rgba(239, 239, 239, 0.87) !important; border-color: rgb(162, 162, 162) !important;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>&nbsp;      10
  &nbsp;&nbsp; /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \
   20&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; 30
