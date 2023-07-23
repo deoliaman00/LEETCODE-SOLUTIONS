@@ -128,20 +128,22 @@ struct Node
  */
 
 //Function to return a list containing elements of left view of the binary tree.
-void func(Node *root,vector<int>&ans,int level)
+void func(vector<int>&ans,Node *root,int lvl)
 {
-    if(root==NULL)return;
-    if(level==ans.size())
+    if(root==NULL)
     {
-        ans.push_back(root->data);
+        return;
     }
-    func(root->left,ans,level+1);
-    func(root->right,ans,level+1);
+    if(lvl==ans.size())
+    {
+        ans.push_back(root->data);    
+    }
+    func(ans,root->left,lvl+1);
+    func(ans,root->right,lvl+1);
 }
-
 vector<int> leftView(Node *root)
 {
-   vector<int>ans;
-   func(root,ans,0);
-   return ans;
+    vector<int>ans;
+    func(ans,root,0);
+    return ans;
 }
