@@ -29,7 +29,7 @@ A node is included in bottom view if it can be seen when we look at the tree fro
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre style="background-color: rgb(22, 22, 22) !important; color: rgba(242, 242, 242, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>       1
 &nbsp;    /   \
 &nbsp;   3     2
@@ -38,13 +38,13 @@ Explanation:</strong>
 First case represents a tree with 3 nodes
 and 2 edges where root is 1, left child of
 1 is 3 and right child of 1 is 2.
-<img alt="" src="https://contribute.geeksforgeeks.org/wp-content/uploads/BT-1.jpg" style="filter: brightness(0.75);">
+<img alt="" src="https://contribute.geeksforgeeks.org/wp-content/uploads/BT-1.jpg">
 Thus nodes of the binary tree will be
 printed as such 3 1 2.</span></pre>
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre style="background-color: rgb(22, 22, 22) !important; color: rgba(242, 242, 242, 0.87) !important; border-color: rgb(160, 160, 160) !important;"><span style="font-size:18px"><strong>Input:
+<pre><span style="font-size:18px"><strong>Input:
 </strong>         10
 &nbsp;      /    \
 &nbsp;     20    30
