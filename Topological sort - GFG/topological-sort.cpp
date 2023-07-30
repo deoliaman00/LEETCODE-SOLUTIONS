@@ -9,43 +9,41 @@ class Solution
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	  // bfs check
-	  vector<int>ans;
-	   int indegree[V]={0};
-	   for(int i=0;i<V;i++)
-	   {
-	       for(auto it:adj[i])
-	       {
-	           indegree[it]++;
-	       }
-	   }
-	   queue<int>qt;
-	   for(int i=0;i<V;i++)
-	   {
-	       if(indegree[i]==0)
-	       {
-	           qt.push(i);
-	       }
-	   }
-	   
-	   
-	   while(!qt.empty())
-	   {
-	       int node=qt.front();
-	       qt.pop();
-	       ans.push_back(node);
-	       for(auto it:adj[node])
-	       {
-	           indegree[it]--;
-	           if(indegree[it]==0)
-	           {
-	               qt.push(it);
-	               
-	           }
-	       }
-	   }
-	  
-	   return ans;
+	    // lets fucking achieve success buddy
+	    vector<int>indegree(V,0);
+	    for(int i=0;i<V;i++)
+	    {
+	        for(auto it:adj[i])
+	        {
+	             indegree[it]++;
+	        }
+	    }
+	    
+	    queue<int>qt;
+	    
+	    for(int i=0;i<V;i++)
+	    {
+	        if(indegree[i]==0)
+	        {
+	            qt.push(i);
+	        }
+	    }
+	    vector<int>ans;
+	    while(!qt.empty())
+	    {
+	        int node=qt.front();
+	        qt.pop();
+	        ans.push_back(node);
+	        for(auto it:adj[node])
+	        {
+	            indegree[it]--;
+	            if(indegree[it]==0)
+	            {
+	                qt.push(it);
+	            }
+	        }
+	    }
+	    return ans;
 	}
 };
 
