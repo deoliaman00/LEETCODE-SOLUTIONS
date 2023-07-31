@@ -5,60 +5,51 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-	bool isPossible(int N, vector<pair<int, int> >& prerequisites)
+	bool isPossible(int N,int P, vector<pair<int, int> >& pre) 
 	{
-	    vector<int>adj[N];
-	    for(auto it: prerequisites)
-	    {
-	        adj[it.first].push_back(it.second);
-	    }
-	    
-	    
-	    // calculating the indegree of the nodes 
-	    int indeg[N]={0};
-	    for(int i=0;i<N;i++)
-	    {
-	        for(auto it:adj[i])
-	        {
-	            indeg[it]++;
-	        }
-	    }
-	    
-	    queue<int>qt;
-	    for(int i=0;i<N;i++)
-	    {
-	        if(indeg[i]==0)
-	        {
-	            qt.push(i);
-	        }
-	    }
-	    vector<int>topo;
-	    
-	    // all the nodes with 0 incoming edges
-	    while(!qt.empty())
-	    {
-	        int node=qt.front();
-	        qt.pop();
-	        topo.push_back(node);
-	        
-	        for(auto it:adj[node])
-	        {
-	            indeg[it]--;// first decrease the particular vector count
-	            // then check is it still 0 or greatert then zero
-	             if(indeg[it]==0)
-	            {
-	                qt.push(it);
-	            }
-	       }
-	    }
-	    
-	    if(topo.size()==N)return true;
-	    else 
-	    return false;
-	    
-	    
-	    
-	    
+	   vector<int>adj[N];
+	   for(auto it:pre)
+	   {
+	       adj[it.second].push_back(it.first);
+	   }
+	    vector<int>indegree(N,0);
+        for(int i=0;i<N;i++)
+        {
+            for(auto it:adj[i])
+            {
+                indegree[it]++;
+            }
+        }
+        int V=N;
+        queue<int>qt;
+        for(int i=0;i<V;i++)
+        {
+            if(indegree[i]==0)
+            {
+                qt.push(i);
+            }
+        }
+        
+        vector<int>ds;
+        while(!qt.empty())
+        {
+            int front=qt.front();
+            qt.pop();
+            ds.push_back(front);
+            for(auto it:adj[front])
+            {
+                indegree[it]--;
+                if(indegree[it]==0)
+                {
+                    qt.push(it);
+                }
+                
+            }
+        }
+        
+        if(V==ds.size())return true;
+        
+        return false;
 	}
 };
 
@@ -79,7 +70,7 @@ int main(){
         // string s;
         // cin>>s;
         Solution ob;
-        if (ob.isPossible(N, prerequisites))
+        if (ob.isPossible(N,P, prerequisites))
             cout << "Yes";
         else
             cout << "No";
