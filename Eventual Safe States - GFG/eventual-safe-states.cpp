@@ -12,36 +12,36 @@ class Solution {
   public:
     vector<int> eventualSafeNodes(int V, vector<int> adj[]) 
     {
-        vector<int>adjR[V];
-        int vis[V]={0};
+        vector<int>revadj[V];
+        vector<int>indegree(V,0);
         for(int i=0;i<V;i++)
         {
             for(auto it:adj[i])
             {
-                adjR[it].push_back(i);
-                    vis[i]++;
-                
+                revadj[it].push_back(i);
+                indegree[i]++;
             }
         }
-        queue<int>qt;
-        vector<int>ans;
-        for(int i=0;i<V;i++)
+        
+        queue<int> qt;
+
+        for (int i = 0; i < V; i++)
         {
-            if(vis[i]==0)
+            if (indegree[i] == 0)
             {
                 qt.push(i);
             }
         }
-        
-        while(!qt.empty())
+        vector<int> ans;
+        while (!qt.empty())
         {
-            int node=qt.front();
-            ans.push_back(node);
+            int node = qt.front();
             qt.pop();
-            for(auto it:adjR[node])
+            ans.push_back(node);
+            for (auto it : revadj[node])
             {
-                vis[it]--;
-                if(vis[it]==0)
+                indegree[it]--;
+                if (indegree[it] == 0)
                 {
                     qt.push(it);
                 }
@@ -49,7 +49,7 @@ class Solution {
         }
         sort(ans.begin(),ans.end());
         return ans;
-        
+     
     }
 };
 
