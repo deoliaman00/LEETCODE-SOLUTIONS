@@ -10,34 +10,33 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-        vector<int>dp(V);
-        for(int i=0;i<V;i++){
-            dp[i]=1e9;
-        }
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>hep;
-        dp[S]=0;
-        // {cost,node}
-        // 2->2--->costs 0  0->0--->costs 0
-        hep.push({0,S});
-        while(!hep.empty())
-        {
-          int cost=hep.top().first;
-          int node=hep.top().second;
-          hep.pop();
-          for(auto it:adj[node])
-          {
-              int cost2=it[1]+cost;
-              int node=it[0];
-              if(dp[node]>cost2)
-              {
-                  dp[node]=cost2;
-                  hep.push({cost2,node});
-                  
-              }
-          }
-        }
-        return dp;
+        vector<int>p(V);
+        vector<int>c(V,1e9);
+        for(int i=0;i<V;i++)p[i]=i;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
         
+        pq.push({0,S});
+        
+        c[S]=0;
+        while(!pq.empty())
+        {
+            auto iu=pq.top();
+            int node=iu.second;
+            int cost=iu.first;
+            pq.pop();
+            for(auto pk:adj[node])
+            {
+                int newNode=pk[0];
+                int newCost=pk[1]+cost;
+                if(c[newNode]>newCost)
+                {
+                    c[newNode]=newCost;
+                    p[newNode]=node;
+                    pq.push({newCost,newNode});
+                }
+            }
+        }
+        return c;
     }
 };
 
