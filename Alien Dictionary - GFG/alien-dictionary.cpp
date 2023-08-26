@@ -8,85 +8,69 @@ using namespace std;
 // User function Template for C++
 
 class Solution{
-    private:
-    vector<int>topoSort(vector<int>adj[],int K)
+    public:
+    vector<int> topoSort(int V, vector<int> adj[])
     {
-        vector<int>topo;
-        int vis[K]={0};
-        for(int i=0;i<K;i++)
+        // lets fucking achieve success buddy
+        vector<int> indegree(V, 0);
+        for (int i = 0; i < V; i++)
         {
-            for(auto it:adj[i])
+            for (auto it : adj[i])
             {
-                vis[it]++;
+                indegree[it]++;
             }
         }
-        
-        
-        queue<int>qt;
-        for(int i=0;i<K;i++)
+
+        queue<int> qt;
+
+        for (int i = 0; i < V; i++)
         {
-            if(vis[i]==0)
+            if (indegree[i] == 0)
             {
                 qt.push(i);
             }
         }
-        
-        
-        while(!qt.empty())
+        vector<int> ans;
+        while (!qt.empty())
         {
-            int node=qt.front();
+            int node = qt.front();
             qt.pop();
-            topo.push_back(node);
-            for(auto it:adj[node])
+            ans.push_back(node);
+            for (auto it : adj[node])
             {
-                vis[it]--;
-                if(vis[it]==0)
+                indegree[it]--;
+                if (indegree[it] == 0)
                 {
                     qt.push(it);
                 }
             }
         }
-        
-        return topo;
-        
+        return ans;
     }
-    public:
     string findOrder(string dict[], int N, int K)
     {
-        // Look first we have to make a adjaceny matrix
-        // which will tell us that this ele will come first
-        // and this ele will come after this
-        vector<int>Adj[K];
+        vector<int>adj[K];
         for(int i=0;i<N-1;i++)
         {
-            string a=dict[i];
-            string b=dict[i+1];
-            int size=min(a.size(),b.size());
-            for(int k=0;k<size;k++)
+            string s1=dict[i];
+            string s2=dict[i+1];
+            int minSize=min(s1.size(),s2.size());
+            for(int k=0;k<minSize;k++)
             {
-                if(a[k]!=b[k])
+                if(s1[k]!=s2[k])
                 {
-                    Adj[a[k]-'a'].push_back(b[k]-'a');
+                    adj[s1[k]-'a'].push_back(s2[k]-'a');
                     break;
                 }
             }
         }
-        
-        // lets make a topo-sort;
-        // we need two things for that
-        // a no of vertices 
-        // a adjaceny matrix
-        
-        vector<int>topo=topoSort(Adj,K);
-        
-        string arr;
-        
-        for(auto it:topo)
+        vector<int>trs=topoSort(K,adj);
+        string str="";
+        for(auto it:trs)
         {
-            arr+=char(it+'a');    
+            str+=char(it+'a');
         }
-        return arr;
-        
+        return str;
     }
 };
 
