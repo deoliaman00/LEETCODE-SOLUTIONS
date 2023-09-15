@@ -3,41 +3,108 @@
 using namespace std;
 
 // } Driver Code Ends
+
+class DisjointSet{
+    private:
+    vector<int>rank,parent,size;
+    public:
+    DisjointSet(int n)
+    {
+        rank.resize(n+1,0);
+        parent.resize(n+1);
+        size.resize(n + 1);
+        for (int i = 0; i <= n; i++)
+        {
+            parent[i] = i;
+            size[i]=1;
+        }
+    }
+    
+    int findPar(int node)
+    {
+        if(node==parent[node])
+        {
+            return node;
+        }
+        return parent[node]=findPar(parent[node]);
+    }
+    void unionBySize(int u,int v)
+    {
+        int u_p=findPar(u);
+        int v_p=findPar(v);
+        if(u_p==v_p)
+        {
+            return;
+        }
+        if(size[u_p]<size[v_p])
+        {
+            parent[u_p]=v_p;
+            size[v_p]+=size[u_p];
+        }
+        else
+        {
+            parent[v_p]=u_p;
+            size[u_p] += size[v_p];
+        }
+    }
+    void unionByRank(int u,int v)
+    {
+        int ultimate_u_parent=findPar(u);
+        int ultimate_v_parent=findPar(v);
+        if(ultimate_v_parent==ultimate_u_parent)
+        {
+            return;
+        }
+        if(rank[ultimate_v_parent]<rank[ultimate_u_parent])
+        {
+            parent[ultimate_v_parent]=ultimate_u_parent;
+        }
+        else if (rank[ultimate_v_parent] > rank[ultimate_u_parent])
+        {
+            parent[ultimate_u_parent]=ultimate_v_parent;
+        }else{
+            parent[ultimate_v_parent]=ultimate_u_parent;
+            rank[ultimate_u_parent]++;
+        }   
+    }
+};
 class Solution
 {
 	public:
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int V, vector<vector<int>> adj[])
     {
-       priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-       pq.push({0,0});
-       vector<int>vis(V,0);
-        int sum=0;
-        while(!pq.empty())
+        vector<pair<int,pair<int,int>>>qt;
+        for(int i=0;i<V;i++)
         {
-            auto it=pq.top();
-            int cost=it.first;
-            int adjNode=it.second;
-          
-            pq.pop();
-            if(vis[adjNode]==1)
+           for(auto it:adj[i])
+           {
+                int u=i;
+                int v=it[0];
+                int wt=it[1];
+                qt.push_back({wt,{u,v}});
+           }
+        }
+        
+        sort(qt.begin(),qt.end());
+        
+        int n=qt.size();
+        DisjointSet obj(n);
+        int maxAns=0;
+        for(auto it:qt)
+        {
+            int wt=it.first;
+            int u=it.second.first;
+            int v=it.second.second;
+           
+            if(obj.findPar(u)!=obj.findPar(v))
             {
-                continue;
-            }
-            vis[adjNode]=1;
-            sum+=cost;
-            for(auto ik:adj[adjNode])
-            {
-                int node=ik[0];
-                int cost2=ik[1];
-                if(!vis[node])
-                {
-                   // vis[node]=1;
-                    pq.push({cost2,node});
-                }
+                maxAns+=wt;
+                obj.unionBySize(u,v);
             }
         }
-        return sum;
+        return maxAns;
+        
     }
 };
 
