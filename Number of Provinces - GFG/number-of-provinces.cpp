@@ -5,49 +5,96 @@ using namespace std;
 
 // } Driver Code Ends
 //User function Template for C++
+class DisjointSet{
+    private:
+    vector<int>rank,parent,size;
+    public:
+    DisjointSet(int n)
+    {
+        rank.resize(n+1,0);
+        parent.resize(n+1);
+        size.resize(n + 1);
+        for (int i = 0; i <= n; i++)
+        {
+            parent[i] = i;
+            size[i]=1;
+        }
+    }
+    
+    int findPar(int node)
+    {
+        if(node==parent[node])
+        {
+            return node;
+        }
+        return parent[node]=findPar(parent[node]);
+    }
+    void unionBySize(int u,int v)
+    {
+        int u_p=findPar(u);
+        int v_p=findPar(v);
+        if(u_p==v_p)
+        {
+            return;
+        }
+        if(size[u_p]<size[v_p])
+        {
+            parent[u_p]=v_p;
+            size[v_p]+=size[u_p];
+        }
+        else
+        {
+            parent[v_p]=u_p;
+            size[u_p] += size[v_p];
+        }
+    }
+    void unionByRank(int u,int v)
+    {
+        int ultimate_u_parent=findPar(u);
+        int ultimate_v_parent=findPar(v);
+        if(ultimate_v_parent==ultimate_u_parent)
+        {
+            return;
+        }
+        if(rank[ultimate_v_parent]<rank[ultimate_u_parent])
+        {
+            parent[ultimate_v_parent]=ultimate_u_parent;
+        }
+        else if (rank[ultimate_v_parent] > rank[ultimate_u_parent])
+        {
+            parent[ultimate_u_parent]=ultimate_v_parent;
+        }else{
+            parent[ultimate_v_parent]=ultimate_u_parent;
+            rank[ultimate_u_parent]++;
+        }   
+    }
+};
 
 class Solution {
   public:
-  void dfs(int node,vector<int>adjA[],int V,int vis[])
-  {
-      vis[node]=1;
-      for(auto it:adjA[node])
-      {
-          if(!vis[it])
-          {
-              dfs(it,adjA,V,vis);
-          }
-      }
-  }
-  int count=0;
-  void func(vector<int>adjA[],int V)
-  {
-      int vis[V]={0};
-      for(int i=0;i<V;i++)
-      {
-          if(!vis[i])
-          { 
-             dfs(i,adjA,V,vis);
-             count++;
-          } 
-      }
-  }
-    int numProvinces(vector<vector<int>> adj, int V)
-    {
-        vector<int>adjA[V];
-        for(int i=0;i<V;i++)
+    int numProvinces(vector<vector<int>> adj, int V) {
+        int n=adj.size();
+        int m=adj[0].size();
+        DisjointSet obj(V);
+        for(int i=0;i<n;i++)
         {
-            for(int j=0;j<V;j++)
+            for(int j=0;j<m;j++)
             {
-                if(adj[i][j]==1 && i!=j)
+                if(adj[i][j]==1)
                 {
-                    adjA[i].push_back(j);
-                    adjA[j].push_back(i);
+                    obj.unionBySize(i,j);
                 }
             }
         }
-        
-        func(adjA,V);
+        int count=0;
+        for(int i=0;i<V;i++)
+        {
+            if(obj.findPar(i)==i)
+            {
+            
+                count++;
+            }
+        }
         return count;
     }
 };
